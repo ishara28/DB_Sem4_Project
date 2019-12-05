@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
 
+const productsRouter = require("./routes/products");
 
-
-
+app.use("/products", productsRouter);
 
 app.listen(PORT, () => console.log("Server is running on Port : " + PORT));
