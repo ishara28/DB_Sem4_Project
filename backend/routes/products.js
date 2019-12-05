@@ -24,4 +24,16 @@ router.post("/addproject", (req, res) => {
   });
 });
 
+//Get A Product Details with given product Id
+router.route("/:id").get((req, res) => {
+  var productId = req.params.id;
+  mysqlConnection.query(
+    "SELECT * FROM product WHERE product_id =" + productId,
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
+});
+
 module.exports = router;
