@@ -37,16 +37,31 @@ router.route("/:id").get((req, res) => {
 });
 
 //Delete a product with given product Id
-router.route("/:id").delete((req, res) => {
+router.route("/delete/:id").delete((req, res) => {
   var productId = req.params.id;
   var sql = "DELETE FROM product WHERE product_id = " + productId;
   mysqlConnection.query(sql, (err, result) => {
     if (err) throw err;
     if (result.affectedRows == 1) {
       res.json("Product Id with " + productId + " Deleted!");
-    }else{
-      res.json("Invalid Product Id")
+    } else {
+      res.json("Invalid Product Id");
     }
+  });
+});
+
+//Update details of product with given Product Id
+router.route("/update/:id").post((req, res) => {
+  var productId = req.params.id;
+  var data = {
+    title: req.body.title,
+    weight: req.body.weight,
+    category_id: req.body.categoryId
+  };
+  var sql = `UPDATE product SET ? WHERE product_id = ` + productId;
+  mysqlConnection.query(sql, data, (err, result) => {
+    if (err) throw err;
+    console.log(result.affectedRows + " record(s) updated");
   });
 });
 
