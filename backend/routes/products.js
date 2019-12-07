@@ -61,7 +61,9 @@ router.route("/update/:id").post((req, res) => {
   var sql = `UPDATE product SET ? WHERE product_id = ` + productId;
   mysqlConnection.query(sql, data, (err, result) => {
     if (err) throw err;
-    console.log(result.affectedRows + " record(s) updated");
+    res.json(
+      result.affectedRows + " record(s) updated with productId " + productId
+    );
   });
 });
 
