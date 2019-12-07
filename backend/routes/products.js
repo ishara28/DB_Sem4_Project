@@ -36,4 +36,18 @@ router.route("/:id").get((req, res) => {
   );
 });
 
+//Delete a product with given product Id
+router.route("/:id").delete((req, res) => {
+  var productId = req.params.id;
+  var sql = "DELETE FROM product WHERE product_id = " + productId;
+  mysqlConnection.query(sql, (err, result) => {
+    if (err) throw err;
+    if (result.affectedRows == 1) {
+      res.json("Product Id with " + productId + " Deleted!");
+    }else{
+      res.json("Invalid Product Id")
+    }
+  });
+});
+
 module.exports = router;
