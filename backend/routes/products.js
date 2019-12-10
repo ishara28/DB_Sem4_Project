@@ -37,7 +37,7 @@ router.route("/products/:id").get((req, res) => {
 });
 
 //Delete a product with given product Id
-router.route("/products/delete/:id").delete((req, res) => {
+router.route("/delete/:id").delete((req, res) => {
   var productId = req.params.id;
   var sql = "DELETE FROM product WHERE product_id = " + productId;
   mysqlConnection.query(sql, (err, result) => {
@@ -51,7 +51,7 @@ router.route("/products/delete/:id").delete((req, res) => {
 });
 
 //Update details of product with given Product Id
-router.route("/products/update/:id").post((req, res) => {
+router.route("/update/:id").post((req, res) => {
   var productId = req.params.id;
   var data = {
     title: req.body.title,
