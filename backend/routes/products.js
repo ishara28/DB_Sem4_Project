@@ -25,7 +25,7 @@ router.post("/addproduct", (req, res) => {
 });
 
 //Get A Product Details with given product Id
-router.route("/products/:id").get((req, res) => {
+router.route("/:id").get((req, res) => {
   var productId = req.params.id;
   mysqlConnection.query(
     "SELECT * FROM product WHERE product_id =" + productId,
