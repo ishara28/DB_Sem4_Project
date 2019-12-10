@@ -10,7 +10,7 @@ router.route("/").get((req, res) => {
 });
 
 //Add a Product
-router.post("/addproject", (req, res) => {
+router.post("/addproduct", (req, res) => {
   var data = {
     product_id: req.body.productId,
     title: req.body.title,
@@ -25,7 +25,7 @@ router.post("/addproject", (req, res) => {
 });
 
 //Get A Product Details with given product Id
-router.route("/:id").get((req, res) => {
+router.route("/products/:id").get((req, res) => {
   var productId = req.params.id;
   mysqlConnection.query(
     "SELECT * FROM product WHERE product_id =" + productId,
@@ -37,7 +37,7 @@ router.route("/:id").get((req, res) => {
 });
 
 //Delete a product with given product Id
-router.route("/delete/:id").delete((req, res) => {
+router.route("/products/delete/:id").delete((req, res) => {
   var productId = req.params.id;
   var sql = "DELETE FROM product WHERE product_id = " + productId;
   mysqlConnection.query(sql, (err, result) => {
@@ -51,7 +51,7 @@ router.route("/delete/:id").delete((req, res) => {
 });
 
 //Update details of product with given Product Id
-router.route("/update/:id").post((req, res) => {
+router.route("/products/update/:id").post((req, res) => {
   var productId = req.params.id;
   var data = {
     title: req.body.title,
