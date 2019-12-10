@@ -26,6 +26,16 @@ router.post("/addcategory", (req, res) => {
   });
 });
 
-
+//Get A Category Details with given category Id
+router.route("/:id").get((req, res) => {
+  var categoryId = req.params.id;
+  mysqlConnection.query(
+    "SELECT * FROM category WHERE category_id =" + categoryId,
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
+});
 
 module.exports = router;
