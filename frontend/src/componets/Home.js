@@ -16,6 +16,7 @@ export class Home extends Component {
       });
     });
   }
+  
 
   render() {
     const { posts } = this.state;
