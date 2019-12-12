@@ -22,10 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-package-lock.json
-package.json
-*.json
-gittest.txt
-ignore.txt
-test1.txt
+
 
