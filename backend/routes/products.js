@@ -10,7 +10,7 @@ router.route("/").get((req, res) => {
 });
 
 //Add a Product
-router.post("/addproject", (req, res) => {
+router.post("/addproduct", (req, res) => {
   var data = {
     product_id: req.body.productId,
     title: req.body.title,
