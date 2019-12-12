@@ -8,9 +8,11 @@ export class Home extends Component {
   };
 
   componentDidMount() {
-    Axios.get("https://jsonplaceholder.typicode.com/posts").then(res => {
+    Axios.get("http://localhost:5000/products").then(res => {
+      console.log(res.data)
       this.setState({
-        posts: res.data.slice(0, 10)
+        posts: res.data
+        
       });
     });
   }
@@ -22,11 +24,13 @@ export class Home extends Component {
       posts.map(post => {
         return (
           <div className="row">
-            <div className="post card" key={post.id}>
+            <div className="post card" key={post.product_id}>
               <div className="column ">
                 <div className="card-content col-4">
-                  <Link to={"/" + post.id}>
+                  <Link to={"/" + post.product_id}>
                     <span className="card title">{post.title}</span>
+                    <span className="card title">{post.category_id}</span>
+
                   </Link>
                   <p>{post.body}</p>
                 </div>

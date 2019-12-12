@@ -6,6 +6,7 @@ import About from "./componets/About";
 import Contact from "./componets/Contact";
 import Post from "./componets/Post";
 import SelectComponent from "./componets/SelectComponent";
+import AddTest from "./componets/DropdownMenu";
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
           <Route path="/contact" component={Contact}></Route>
           <Route path="/:post_id" component={Post}></Route>
         </Switch>
+        {/* <SelectComponent/> */}
       </div>
-      <SelectComponent />
     </BrowserRouter>
   );
 }

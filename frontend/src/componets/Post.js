@@ -7,17 +7,23 @@ class Post extends Component {
   };
   componentDidMount() {
     let id = this.props.match.params.post_id;
-    Axios.get("https://jsonplaceholder.typicode.com/posts/" + id).then(res => {
+
+    Axios.get("http://localhost:5000/products/" + id).then(res => {
       this.setState({
         post: res.data
       });
+      console.log("st", this.state.post);
     });
   }
   render() {
     const post = this.state.post ? (
       <div className="post">
-        <h4 className="center">{this.state.title}</h4>
-        <p>{this.state.post.body}</p>
+        <h4 className="center">{this.state.post[0].title}</h4>
+
+        <div className="center">
+          <p>{this.state.post[0].product_id}</p>
+          <button className="waves-effect waves-light btn">Add to Cart</button>
+        </div>
       </div>
     ) : (
       <div className="center">Loading...</div>
