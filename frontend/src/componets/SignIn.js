@@ -8,7 +8,7 @@ export class SignIn extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.user_name,this.state.password);
+    console.log(this.state.user_name, this.state.password);
   };
 
   handleChange = e => {
@@ -21,7 +21,7 @@ export class SignIn extends Component {
       <div className="container" style={{ margin: "100px auto" }}>
         <div className="row card hoverable">
           <div className="card-content">
-            <h4 class="center blue-text">Login Form</h4>
+            <h4 class="center blue-text">SIGNIN Form</h4>
             <form onSubmit={this.handleSubmit} className="row s12">
               <div className="col s12">
                 <div className="input-field">
@@ -52,7 +52,7 @@ export class SignIn extends Component {
                   type="submit"
                   class="btn btn-large waves-effect waves-light blue"
                 >
-                  Login<i class="material-icons right"></i>
+                  SignIn<i class="material-icons right"></i>
                 </button>
               </div>
             </form>

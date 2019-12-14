@@ -12,6 +12,8 @@ const PORT = process.env.PORT || 5000;
 
 const productsRouter = require("./routes/products");
 const categoryRouter = require("./routes/category");
+const userRouter = require("./routes/user");
+
 
 app.use("/products", productsRouter);
 app.use("/category", categoryRouter);

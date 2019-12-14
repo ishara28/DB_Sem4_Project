@@ -1,33 +1,48 @@
-import React from "react";
-import Navbar from "./componets/Navbar";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Home from "./componets/Home";
-import About from "./componets/About";
-import Contact from "./componets/Contact";
-import Post from "./componets/Post";
+import React, { Component } from "react";
+import Showcase from "./componets/Showcase";
+import NavbarHome from "./componets/NavbarHome";
 import SignIn from "./componets/SignIn";
+import Register from "./componets/Register";
 
-function App() {
-  return (
-    // <BrowserRouter>
-    //   <div className="App">
-    //     <Navbar />
+export class App extends Component {
+  state = {
+    isSignInClicked: false,
+    isRegisterClicked: false
+  };
 
-    //     <Switch>
-    //       <Route exact path="/" component={Home}></Route>
-    //       <Route path="/about" component={About}></Route>
-    //       <Route path="/contact" component={Contact}></Route>
-    //       <Route path="/:post_id" component={Post}></Route>
-    //     </Switch>
-    //   </div>
-    // </BrowserRouter>
+  clickSignInHandle = e => {
+    e.preventDefault();
+    this.setState(
+      {
+        [e.target.name]: true
+      },
+      function() {
+        console.log(this.state.isSignInClicked);
+      }
+    );
+  };
 
-    <div className="App">
-      <SignIn/>
-    </div>
+  render() {
+    const SignInForm = this.state.isSignInClicked ? (
+      <div>
+        <SignIn />
+      </div>
+    ) : null;
+    const RegisterForm = this.state.isRegisterClicked ? (
+      <div>
+        <Register />
+      </div>
+    ) : null;
 
- 
-  );
+    return (
+      <div style={{ background: "light-blue" }}>
+        {/* <Showcase /> */}
+        <NavbarHome isSignInClicked={this.clickSignInHandle} />
+        {SignInForm}
+        {RegisterForm}
+      </div>
+    );
+  }
 }
 
 export default App;

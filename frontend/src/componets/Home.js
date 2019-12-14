@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import SelectCategory from "./SelectCategory";
+import SignIn from "./SignIn";
 
 export class Home extends Component {
   state = {
@@ -18,20 +19,21 @@ export class Home extends Component {
   }
 
   selectCategory = category => {
-    this.setState({
-      category: category
-    },()=>{
-      
-      Axios.get("http://localhost:5000/products/" + this.state.category, {}).then(res => {
-        
-      this.setState({
-        posts: res.data
-      });
-      
-    });
-    });
-
-    
+    this.setState(
+      {
+        category: category
+      },
+      () => {
+        Axios.get(
+          "http://localhost:5000/products/" + this.state.category,
+          {}
+        ).then(res => {
+          this.setState({
+            posts: res.data
+          });
+        });
+      }
+    );
   };
 
   render() {
@@ -57,15 +59,16 @@ export class Home extends Component {
     ) : (
       <h1>No posts yet under {category}</h1>
     );
-    return (
-      <div>
-        <SelectCategory selectCategory={this.selectCategory} />
-        <div className="container">
-          <h4 className="center"></h4>
-          <div className="row">{postList}</div>
-        </div>
-      </div>
-    );
+
+   return(
+    <div>
+    <SelectCategory selectCategory={this.selectCategory} />
+    <div className="container">
+      <h4 className="center"></h4>
+      <div className="row">{postList}</div>
+    </div>
+  </div>
+   )
   }
 }
 
