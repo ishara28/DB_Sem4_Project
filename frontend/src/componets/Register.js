@@ -1,17 +1,24 @@
 import React, { Component } from "react";
+import Axios from "axios";
 
 export class Register extends Component {
   state = {
     first_name: null,
     last_name: null,
     email: null,
+    user_id:null,
     contact_number: null,
     address: null
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.first_name, this.state.last_name);
+    Axios.post("http://localhost:5000/user/adduser").then(res => {
+        this.setState({
+          post: res.data
+        });
+        console.log(this.state.first_name);
+      });
   };
 
   handleChange = e => {
@@ -55,6 +62,18 @@ export class Register extends Component {
                   <input
                     type="text"
                     onChange={this.handleChange}
+                    value={this.state.user_id}
+                    name="user_id"
+                    placeholder=" user id*"
+                  ></input>
+                </div>
+              </div>
+
+              <div className="col s12">
+                <div className="">
+                  <input
+                    type="text"
+                    onChange={this.handleChange}
                     value={this.state.address}
                     name="address"
                     placeholder="address*"
@@ -89,7 +108,7 @@ export class Register extends Component {
               <div class="col s12 center">
                 <button
                   type="submit"
-                  class="btn btn-large waves-effect waves-light blue"
+                  class="btn btn-large waves-effect cyan darken-1"
                 >
                   Register<i class="material-icons right"></i>
                 </button>

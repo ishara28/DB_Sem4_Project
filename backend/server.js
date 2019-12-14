@@ -17,5 +17,7 @@ const userRouter = require("./routes/user");
 
 app.use("/products", productsRouter);
 app.use("/category", categoryRouter);
+app.use("/user", userRouter);
+
 
 app.listen(PORT, () => console.log("Server is running on Port : " + PORT));

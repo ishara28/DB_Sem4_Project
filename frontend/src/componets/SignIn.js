@@ -21,7 +21,7 @@ export class SignIn extends Component {
       <div className="container" style={{ margin: "100px auto" }}>
         <div className="row card hoverable">
           <div className="card-content">
-            <h4 class="center blue-text">SIGNIN Form</h4>
+            <h4 class="center blue-text">SignIn Form</h4>
             <form onSubmit={this.handleSubmit} className="row s12">
               <div className="col s12">
                 <div className="input-field">
@@ -50,7 +50,7 @@ export class SignIn extends Component {
               <div class="col s12 center">
                 <button
                   type="submit"
-                  class="btn btn-large waves-effect waves-light blue"
+                  class="btn btn-large waves-effect cyan darken-1"
                 >
                   SignIn<i class="material-icons right"></i>
                 </button>
