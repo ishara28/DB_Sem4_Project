@@ -9,6 +9,27 @@ router.route("/").get((req, res) => {
   });
 });
 
+//Get All Products according to category
+router.route("/:category").get((req, res) => {
+  var category_name = req.params.category;
+ 
+
+  
+
+  
+  var sql = "SELECT * FROM product natural join category where category_name=? ";
+console.log(sql)
+  mysqlConnection.query(
+    sql,
+    category_name,
+
+    (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
+});
+
 //Add a Product
 router.post("/addproduct", (req, res) => {
   var data = {
@@ -25,16 +46,16 @@ router.post("/addproduct", (req, res) => {
 });
 
 //Get A Product Details with given product Id
-router.route("/:id").get((req, res) => {
-  var productId = req.params.id;
-  mysqlConnection.query(
-    "SELECT * FROM product WHERE product_id =" + productId,
-    (err, result, fields) => {
-      if (err) throw err;
-      res.json(result);
-    }
-  );
-});
+// router.route("/:id").get((req, res) => {
+//   var productId = req.params.id;
+//   mysqlConnection.query(
+//     "SELECT * FROM product WHERE product_id =" + productId,
+//     (err, result, fields) => {
+//       if (err) throw err;
+//       res.json(result);
+//     }
+//   );
+// });
 
 //Delete a product with given product Id
 router.route("/delete/:id").delete((req, res) => {

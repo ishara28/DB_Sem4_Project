@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import DynamicSelect from "./DynamicSelect";
 
 const arrayOfData = [
@@ -36,19 +37,16 @@ class SelectComponent extends Component {
 
   render() {
     return (
-      <div className="SelectComponent">
-        <header className="SelectComponent-header">
-          <h1 className="SelectComponent-title">
-            Dynamic Select Dropdown List
-          </h1>
+      <div>
+        <header>
+          <h1>Dynamic Select Dropdown List</h1>
         </header>
-        <p className="SelectComponent-intro">
-          <DynamicSelect
+        <p>
+          <DynamicSelect 
             arrayOfData={arrayOfData}
             onSelectChange={this.handleSelectChange}
           />{" "}
           <br />
-          
           <br />
           <div>Selected value: {this.state.selectedValue}</div>
         </p>

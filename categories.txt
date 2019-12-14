@@ -1,0 +1,14 @@
+Electronic=>Mobile
+          =>Laptop
+          =>Tab
+          =>Speaker
+          =>Headphone
+         
+
+
+
+
+Toy=>cotton=>Teddy
+           =>Doll
+    =>Plastic=>Car
+            
