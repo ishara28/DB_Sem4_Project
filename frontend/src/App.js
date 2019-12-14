@@ -5,26 +5,28 @@ import Home from "./componets/Home";
 import About from "./componets/About";
 import Contact from "./componets/Contact";
 import Post from "./componets/Post";
+import SignIn from "./componets/SignIn";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
+    // <BrowserRouter>
+    //   <div className="App">
+    //     <Navbar />
 
-        <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <Route path="/about" component={About}></Route>
-          <Route path="/contact" component={Contact}></Route>
-          <Route path="/:post_id" component={Post}></Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
+    //     <Switch>
+    //       <Route exact path="/" component={Home}></Route>
+    //       <Route path="/about" component={About}></Route>
+    //       <Route path="/contact" component={Contact}></Route>
+    //       <Route path="/:post_id" component={Post}></Route>
+    //     </Switch>
+    //   </div>
+    // </BrowserRouter>
 
-    // <div className="App">
-    //   <h4>Helloooooo</h4>
-    //   {/* <SelectComponent /> */}
-    // </div>
+    <div className="App">
+      <SignIn/>
+    </div>
+
+ 
   );
 }
 
