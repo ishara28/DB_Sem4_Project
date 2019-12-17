@@ -11,8 +11,8 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <Home/>
-        {/* <BrowserRouter>
+        
+        <BrowserRouter>
           <switch>
             <Route path="/" exact component={NavbarHome}></Route>
 
@@ -40,13 +40,13 @@ export class App extends Component {
               path="/showcase"
               render={props => (
                 <div>
-                  <Navbar />
+                  
                   <Showcase />
                 </div>
               )}
             />
           </switch>
-        </BrowserRouter> */}
+        </BrowserRouter>
       </div>
     );
   }

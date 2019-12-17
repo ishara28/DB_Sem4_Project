@@ -14,9 +14,9 @@ function Showcase() {
         <Navbar />
 
         <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <Route path="/about" component={About}></Route>
-          <Route path="/contact" component={Contact}></Route>
+          <Route exact path="/showcase" component={Home}></Route>
+          <Route path="/showcase/about" component={About}></Route>
+          <Route path="/showcase/contact" component={Contact}></Route>
           
 
           <Route path="/:post_id" component={Post}></Route>

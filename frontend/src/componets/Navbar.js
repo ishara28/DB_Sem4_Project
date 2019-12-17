@@ -12,13 +12,13 @@ const Navbar = props => {
         <a className="brand-logo">C online Market</a>
         <ul className="right">
           <li>
-            <Link to="/">Showcase</Link>
+            <Link to="/showcase">Showcase</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/showcase/about">About</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/showcase/contact">Contact</Link>
           </li>
         </ul>
       </div>
