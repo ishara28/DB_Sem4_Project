@@ -10,16 +10,11 @@ router.route("/").get((req, res) => {
 });
 
 //Get All Products according to category
-router.route("/:category").get((req, res) => {
-  var category_name = req.params.category;
-
-  var sql =
-    "SELECT * FROM product natural join category where category_name=? ";
-  console.log(sql);
+router.route("/category/:id").get((req, res) => {
+  var categoryId = req.params.id;
   mysqlConnection.query(
-    sql,
-    category_name,
-
+    "SELECT * FROM product natural join category where category_id =" +
+      categoryId,
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);
@@ -42,7 +37,7 @@ router.post("/addproduct", (req, res) => {
   });
 });
 
-//Get A Category Details with given category Id
+//Get A Product Details with given product Id
 router.route("/:id").get((req, res) => {
   var productId = req.params.id;
   mysqlConnection.query(
