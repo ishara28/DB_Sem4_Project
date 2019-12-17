@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import {Link} from "react-router-dom";
 
 class Post extends Component {
   state = {
@@ -7,22 +8,23 @@ class Post extends Component {
   };
   componentDidMount() {
     let id = this.props.match.params.post_id;
-
+    
     Axios.get("http://localhost:5000/products/" + id).then(res => {
       this.setState({
         post: res.data
       });
-      console.log("st", this.state.post);
+      console.log(res);
     });
   }
   render() {
     const post = this.state.post ? (
       <div className="post">
-        <h4 className="center">{this.state.post[0].title}</h4>
+        {/* <h4 className="center">{this.state.post[0].title}</h4> */}
 
         <div className="center">
-          <p>{this.state.post[0].product_id}</p>
-          <button className="waves-effect waves-light btn">Add to Cart</button>
+          <p>{this.state.post[0].title}</p>
+          <p>weight {this.state.post[0].weight}g</p>
+          <Link to="/cart" className="waves-effect waves-light btn">Add to Cart</Link>
         </div>
       </div>
     ) : (
