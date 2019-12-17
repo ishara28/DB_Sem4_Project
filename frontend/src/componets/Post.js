@@ -18,7 +18,7 @@ class Post extends Component {
   render() {
     const post = this.state.post ? (
       <div className="post">
-        {/* <h4 className="center">{this.state.post[0].title}</h4> */}
+        <h4 className="center">{this.state.post[0].title}</h4>
 
         <div className="center">
           <p>{this.state.post[0].product_id}</p>

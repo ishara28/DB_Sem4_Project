@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import SelectCategory from "./SelectCategory";
-import SignIn from "./SignIn";
 
 export class Home extends Component {
   state = {
@@ -45,10 +44,13 @@ export class Home extends Component {
             <div className="post card" key={post.product_id}>
               <div className="column ">
                 <div className="card-content col-4">
-                  {/* <Link to={"/" + post.product_id}></Link> */}
-                     <span className="card title">{post.title}</span>
-                    <span className="card title">{post.category_id}</span>
+                  <Link to={"showcase/" + post.title}>
+                  <span className="card title">{post.title}</span><br></br>
+                  <span className="card title">{post.category_id}</span>
+                  </Link>
+
                   
+
                   <p>{post.body}</p>
                 </div>
               </div>
@@ -60,15 +62,15 @@ export class Home extends Component {
       <h1>No posts yet under {category}</h1>
     );
 
-   return(
-    <div>
-    <SelectCategory selectCategory={this.selectCategory} />
-    <div className="container">
-      <h4 className="center"></h4>
-      <div className="row">{postList}</div>
-    </div>
-  </div>
-   )
+    return (
+      <div>
+        <SelectCategory selectCategory={this.selectCategory} />
+        <div className="container">
+          <h4 className="center"></h4>
+          <div className="row">{postList}</div>
+        </div>
+      </div>
+    );
   }
 }
 
