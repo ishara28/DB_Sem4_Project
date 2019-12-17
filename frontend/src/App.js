@@ -3,43 +3,38 @@ import Showcase from "./componets/Showcase";
 import NavbarHome from "./componets/NavbarHome";
 import SignIn from "./componets/SignIn";
 import Register from "./componets/Register";
+import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
+import Navbar from "./componets/Navbar";
 
 export class App extends Component {
-  state = {
-    isSignInClicked: false,
-    isRegisterClicked: false
-  };
-
-  clickSignInHandle = e => {
-    e.preventDefault();
-    this.setState(
-      {
-        [e.target.name]: true
-      },
-      function() {
-        console.log(this.state.isSignInClicked);
-      }
-    );
-  };
-
   render() {
-    const SignInForm = this.state.isSignInClicked ? (
-      <div>
-        <SignIn />
-      </div>
-    ) : null;
-    const RegisterForm = this.state.isRegisterClicked ? (
-      <div>
-        <Register />
-      </div>
-    ) : null;
-
     return (
-      <div style={{ background: "light-blue" }}>
-        {/* <Showcase /> */}
-        <NavbarHome isSignInClicked={this.clickSignInHandle} />
-        {SignInForm}
-        {RegisterForm}
+      <div>
+        <BrowserRouter>
+          <switch>
+            <Route path="/" exact component={NavbarHome}></Route>
+
+            <Route
+              path="/signup"
+              render={props => (
+                <div>
+                  <Navbar />
+                  <SignIn />
+                </div>
+              )}
+            />
+
+            <Route
+              path="/register"
+              render={props => (
+                <div>
+                  <Navbar />
+                  <Register />
+                </div>
+              )}
+            />
+          </switch>
+        </BrowserRouter>
       </div>
     );
   }

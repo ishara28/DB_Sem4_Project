@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./NavbarHome";
+import Navbar from "./Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
@@ -17,6 +17,8 @@ function Showcase() {
           <Route exact path="/" component={Home}></Route>
           <Route path="/about" component={About}></Route>
           <Route path="/contact" component={Contact}></Route>
+          
+
           <Route path="/:post_id" component={Post}></Route>
         </Switch>
       </div>
