@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 12, 2019 at 07:14 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Host: 127.0.0.1:3306
+-- Generation Time: Dec 17, 2019 at 02:31 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,11 +28,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `attribute`
 --
 
-CREATE TABLE `attribute` (
-  `attribute_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `attribute`;
+CREATE TABLE IF NOT EXISTS `attribute` (
+  `attribute_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` varchar(10) NOT NULL,
   `attribute_name` varchar(20) NOT NULL,
-  `value` varchar(10) NOT NULL
+  `value` varchar(10) NOT NULL,
+  PRIMARY KEY (`attribute_id`),
+  KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -41,10 +44,14 @@ CREATE TABLE `attribute` (
 -- Table structure for table `cart`
 --
 
-CREATE TABLE `cart` (
-  `cart_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE IF NOT EXISTS `cart` (
+  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(10) NOT NULL,
-  `order_id` varchar(10) NOT NULL
+  `order_id` varchar(10) NOT NULL,
+  PRIMARY KEY (`cart_id`),
+  KEY `user_id` (`user_id`,`order_id`),
+  KEY `order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53,9 +60,12 @@ CREATE TABLE `cart` (
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category` (
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
   `category_id` varchar(10) NOT NULL,
-  `category_name` varchar(20) NOT NULL
+  `category_name` varchar(20) NOT NULL,
+  PRIMARY KEY (`category_id`),
+  KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -64,11 +74,18 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
 ('11', 'Electronic'),
-('12', 'Others'),
-('21', 'Cat 2'),
-('22', 'Cat 2'),
-('23', 'Cat 2'),
-('24', 'Cat 2');
+('12', 'Table fan'),
+('13', 'Mobile'),
+('14', 'Laptop'),
+('15', 'Tab'),
+('16', 'Speaker'),
+('17', 'Headphone'),
+('18', 'Toy'),
+('19', 'Cotton'),
+('20', 'Teddy'),
+('21', 'Doll'),
+('22', 'Plastic'),
+('23', 'Car');
 
 -- --------------------------------------------------------
 
@@ -76,10 +93,28 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 -- Table structure for table `category_subcategory`
 --
 
-CREATE TABLE `category_subcategory` (
+DROP TABLE IF EXISTS `category_subcategory`;
+CREATE TABLE IF NOT EXISTS `category_subcategory` (
   `category_id` varchar(10) NOT NULL,
   `subcatergory_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category_subcategory`
+--
+
+INSERT INTO `category_subcategory` (`category_id`, `subcatergory_id`) VALUES
+('11', '12'),
+('11', '13'),
+('11', '14'),
+('11', '15'),
+('11', '16'),
+('11', '17'),
+('18', '19'),
+('18', '22'),
+('19', '20'),
+('19', '21'),
+('22', '23');
 
 -- --------------------------------------------------------
 
@@ -87,12 +122,15 @@ CREATE TABLE `category_subcategory` (
 -- Table structure for table `delivery`
 --
 
-CREATE TABLE `delivery` (
-  `delivery_id` int(20) NOT NULL,
+DROP TABLE IF EXISTS `delivery`;
+CREATE TABLE IF NOT EXISTS `delivery` (
+  `delivery_id` int(20) NOT NULL AUTO_INCREMENT,
   `order_id` varchar(10) NOT NULL,
   `remaining_days` int(2) NOT NULL,
   `address` varchar(20) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  PRIMARY KEY (`delivery_id`),
+  KEY `order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -101,14 +139,18 @@ CREATE TABLE `delivery` (
 -- Table structure for table `order`
 --
 
-CREATE TABLE `order` (
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE IF NOT EXISTS `order` (
   `order_id` varchar(10) NOT NULL,
   `user_id` varchar(10) NOT NULL,
   `payment_method` varchar(10) NOT NULL,
   `delivery_method` varchar(10) NOT NULL,
   `order_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `address` varchar(20) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `user_id` (`user_id`),
+  KEY `order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -117,10 +159,13 @@ CREATE TABLE `order` (
 -- Table structure for table `order_item`
 --
 
-CREATE TABLE `order_item` (
+DROP TABLE IF EXISTS `order_item`;
+CREATE TABLE IF NOT EXISTS `order_item` (
   `SKU` varchar(20) NOT NULL,
   `order_id` varchar(10) NOT NULL,
-  `qty` int(3) NOT NULL
+  `qty` int(3) NOT NULL,
+  PRIMARY KEY (`SKU`),
+  KEY `order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -129,11 +174,14 @@ CREATE TABLE `order_item` (
 -- Table structure for table `product`
 --
 
-CREATE TABLE `product` (
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE IF NOT EXISTS `product` (
   `product_id` varchar(10) NOT NULL,
   `title` varchar(30) NOT NULL,
   `weight` int(10) NOT NULL,
-  `category_id` varchar(10) NOT NULL
+  `category_id` varchar(10) NOT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -141,10 +189,12 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `title`, `weight`, `category_id`) VALUES
-('1', 'Apple 6S', 450, '11'),
-('2', 'Other Product', 254, '12'),
-('3', 'Mic', 220, '11'),
-('6', 'title', 45, '12');
+('1', 'Apple 6S', 450, '13'),
+('2', 'JBL speaker', 254, '16'),
+('3', 'Cotton Teddy', 220, '20'),
+('4', 'Samsung s6', 125, '13'),
+('5', 'Nokia A3', 160, '13'),
+('6', 'Toy car', 45, '23');
 
 -- --------------------------------------------------------
 
@@ -152,12 +202,14 @@ INSERT INTO `product` (`product_id`, `title`, `weight`, `category_id`) VALUES
 -- Table structure for table `product_varient`
 --
 
-CREATE TABLE `product_varient` (
+DROP TABLE IF EXISTS `product_varient`;
+CREATE TABLE IF NOT EXISTS `product_varient` (
   `product-id` varchar(10) NOT NULL,
   `SKU` varchar(20) NOT NULL,
   `varient` varchar(100) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `default` varchar(10) NOT NULL
+  `default` varchar(10) NOT NULL,
+  PRIMARY KEY (`product-id`,`SKU`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -166,110 +218,54 @@ CREATE TABLE `product_varient` (
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
   `user_id` varchar(10) NOT NULL,
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `telephone_num` varchar(10) NOT NULL,
-  `address` varchar(100) NOT NULL
+  `contact_number` varchar(10) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Indexes for dumped tables
---
+-- --------------------------------------------------------
 
 --
--- Indexes for table `attribute`
---
-ALTER TABLE `attribute`
-  ADD PRIMARY KEY (`attribute_id`),
-  ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `cart`
---
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cart_id`),
-  ADD KEY `user_id` (`user_id`,`order_id`),
-  ADD KEY `order_id` (`order_id`);
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`category_id`),
-  ADD KEY `category_id` (`category_id`);
-
---
--- Indexes for table `category_subcategory`
---
-ALTER TABLE `category_subcategory`
-  ADD PRIMARY KEY (`category_id`);
-
---
--- Indexes for table `delivery`
---
-ALTER TABLE `delivery`
-  ADD PRIMARY KEY (`delivery_id`),
-  ADD KEY `order_id` (`order_id`);
-
---
--- Indexes for table `order`
---
-ALTER TABLE `order`
-  ADD PRIMARY KEY (`order_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `order_id` (`order_id`);
-
---
--- Indexes for table `order_item`
---
-ALTER TABLE `order_item`
-  ADD PRIMARY KEY (`SKU`),
-  ADD KEY `order_id` (`order_id`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`product_id`),
-  ADD KEY `category_id` (`category_id`);
-
---
--- Indexes for table `product_varient`
---
-ALTER TABLE `product_varient`
-  ADD PRIMARY KEY (`product-id`,`SKU`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- Table structure for table `varient`
 --
 
---
--- AUTO_INCREMENT for table `attribute`
---
-ALTER TABLE `attribute`
-  MODIFY `attribute_id` int(11) NOT NULL AUTO_INCREMENT;
+DROP TABLE IF EXISTS `varient`;
+CREATE TABLE IF NOT EXISTS `varient` (
+  `varient_id` varchar(10) NOT NULL,
+  `varient_type_id` varchar(10) NOT NULL,
+  `varient_description` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- AUTO_INCREMENT for table `cart`
+-- Table structure for table `varient_type`
 --
-ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+
+DROP TABLE IF EXISTS `varient_type`;
+CREATE TABLE IF NOT EXISTS `varient_type` (
+  `varient_type_id` varchar(10) NOT NULL,
+  `varient_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`varient_type_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- AUTO_INCREMENT for table `delivery`
+-- Dumping data for table `varient_type`
 --
-ALTER TABLE `delivery`
-  MODIFY `delivery_id` int(20) NOT NULL AUTO_INCREMENT;
+
+INSERT INTO `varient_type` (`varient_type_id`, `varient_type`) VALUES
+('V01', 'Color'),
+('V02', 'Internal memory'),
+('V03', 'Local'),
+('V04', 'Imported'),
+('V05', 'dB value');
 
 --
 -- Constraints for dumped tables
