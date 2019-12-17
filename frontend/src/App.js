@@ -5,12 +5,14 @@ import SignIn from "./componets/SignIn";
 import Register from "./componets/Register";
 import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./componets/Navbar";
+import Home from "./componets/Home";
 
 export class App extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <Home/>
+        {/* <BrowserRouter>
           <switch>
             <Route path="/" exact component={NavbarHome}></Route>
 
@@ -18,7 +20,7 @@ export class App extends Component {
               path="/signup"
               render={props => (
                 <div>
-                  <Navbar />
+                  <NavbarHome />
                   <SignIn />
                 </div>
               )}
@@ -28,13 +30,23 @@ export class App extends Component {
               path="/register"
               render={props => (
                 <div>
-                  <Navbar />
+                  <NavbarHome />
                   <Register />
                 </div>
               )}
             />
+
+            <Route
+              path="/showcase"
+              render={props => (
+                <div>
+                  <Navbar />
+                  <Showcase />
+                </div>
+              )}
+            />
           </switch>
-        </BrowserRouter>
+        </BrowserRouter> */}
       </div>
     );
   }
