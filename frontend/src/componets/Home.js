@@ -45,10 +45,10 @@ export class Home extends Component {
             <div className="post card" key={post.product_id}>
               <div className="column ">
                 <div className="card-content col-4">
-                  <Link to={"/" + post.product_id}>
-                    <span className="card title">{post.title}</span>
-                    {/* <span className="card title">{post.category_id}</span> */}
-                  </Link>
+                  {/* <Link to={"/" + post.product_id}></Link> */}
+                     <span className="card title">{post.title}</span>
+                    <span className="card title">{post.category_id}</span>
+                  
                   <p>{post.body}</p>
                 </div>
               </div>
