@@ -37,21 +37,51 @@
 
 import React, { Component } from "react";
 import axios from "axios";
+import Dropdown from "react-dropdown";
+import 'react-dropdown/style.css'
 
 export class SelectCategory extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      categories: []
+      categories: ["Ishara", "Asanka", "Dilanka", "Sajeewa"],
+      categories2: [],
+      selectedCategory: ""
     };
   }
-  componentDidMount() {
-    axios.get()
-  }
+
+  // componentDidMount() {
+  //   axios
+  //     .get("http://localhost:5000/category")
+  //     .then(res =>
+  //       this.setState({
+  //         categories2: res.data
+  //       })
+  //     )
+  //     .then(console.log(this.state.categories2))
+  //     .catch(err => console.log(err));
+  // }
+
+  handleSelectedCategory = option => {
+    const selectedCategory = option.value;
+    this.setState({ selectedCategory });
+  };
 
   render() {
-    return <div></div>;
+    const { categories, selectedCategory } = this.state;
+    return (
+      <div className="container mt-2">
+        {this.state.categories2}
+        <Dropdown
+          className="row"
+          options={categories}
+          onChange={this.handleSelectedCategory}
+          value={selectedCategory}
+          placeholder="Select an option      "
+        />
+      </div>
+    );
   }
 }
 
