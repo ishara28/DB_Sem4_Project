@@ -13,7 +13,6 @@ const NavbarHome = props => {
               Sign up
             </Link>
           </li>
-          
 
           <li>
             <Link to="/register" className="waves-effect waves-light btn">
