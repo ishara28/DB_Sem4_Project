@@ -44,7 +44,7 @@ export class Home extends Component {
             <div className="center post card" key={post.product_id}>
               <div className="column ">
                 <div className="card-content col-4">
-                  <Link to={"/" + post.product_id}>
+                  <Link to={"/showcase/" + post.product_id}>
                     <span className="card title">{post.title}</span><br></br>
                     <span className="card title">whight: {post.weight}g</span><br></br>
                     <span className="card title">{post.category_id}</span>

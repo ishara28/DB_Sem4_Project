@@ -10,7 +10,7 @@ class Post extends Component {
     let id = this.props.match.params.post_id;
     console.log("pased",id)
     
-    Axios.get("http://localhost:5000/products/" + id).then(res => {
+    Axios.get("http://localhost:5000/products/showcase/" + id).then(res => {
       this.setState({
         post: res.data
       });
