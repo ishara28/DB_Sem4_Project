@@ -3,26 +3,19 @@ const mysqlConnection = require("../connection");
 
 //Get All Products
 router.route("/").get((req, res) => {
-  mysqlConnection.query("SELECT * FROM product", function(err, result, fields) {
+  const qry="SELECT * FROM product";
+  mysqlConnection.query(qry, function(err, result, fields) {
     if (err) throw err;
     res.json(result);
   });
 });
 
 //Get All Products according to category
-router.route("/category").get((req, res) => {
-  // var categoryName = req.params.categoryname;
-  // mysqlConnection.query(
-  //   "SELECT * FROM product natural join category where category_name  =" +
-  //     categoryId,
-  //   (err, result, fields) => {
-  //     if (err) throw err;
-  //     res.json(result);
-  //   }
-  // );
+router.route("/category/:category").get((req, res) => {
+  var category = req.params.category;
+  const sql="SELECT * FROM product natural join category where category_name=?";
   mysqlConnection.query(
-    "SELECT * FROM product natural join category where category_name  = " +
-      " Car",
+    sql,category,
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);
@@ -47,45 +40,32 @@ router.post("/addproduct", (req, res) => {
 
 //Get A Product Details with given product Id
 router.route("/:id").get((req, res) => {
+  console.log("789")
   var productId = req.params.id;
+  const qry="SELECT * FROM product WHERE product_id =";
   mysqlConnection.query(
-    "SELECT * FROM product WHERE product_id =" + productId,
-    (err, result, fields) => {
+    (qry,productId,err, result, fields) => {
       if (err) throw err;
       res.json(result);
     }
   );
 });
 
-//Delete a product with given product Id
-router.route("/delete/:id").delete((req, res) => {
-  var productId = req.params.id;
-  var sql = "DELETE FROM product WHERE product_id = " + productId;
-  mysqlConnection.query(sql, (err, result) => {
-    if (err) throw err;
-    if (result.affectedRows == 1) {
-      res.json("Product Id with " + productId + " Deleted!");
-    } else {
-      res.json("Invalid Product Id");
-    }
-  });
-});
-
 //Update details of product with given Product Id
-router.route("/update/:id").post((req, res) => {
-  var productId = req.params.id;
-  var data = {
-    title: req.body.title,
-    weight: req.body.weight,
-    category_id: req.body.categoryId
-  };
-  var sql = `UPDATE product SET ? WHERE product_id = ` + productId;
-  mysqlConnection.query(sql, data, (err, result) => {
-    if (err) throw err;
-    res.json(
-      result.affectedRows + " record(s) updated with productId " + productId
-    );
-  });
-});
+// router.route("/update/:id").post((req, res) => {
+//   var productId = req.params.id;
+//   var data = {
+//     title: req.body.title,
+//     weight: req.body.weight,
+//     category_id: req.body.categoryId
+//   };
+//   var sql = `UPDATE product SET ? WHERE product_id = ` + productId;
+//   mysqlConnection.query(sql, data, (err, result) => {
+//     if (err) throw err;
+//     res.json(
+//       result.affectedRows + " record(s) updated with productId " + productId
+//     );
+//   });
+// });
 
 module.exports = router;

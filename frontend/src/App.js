@@ -6,6 +6,7 @@ import Register from "./componets/Register";
 import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./componets/Navbar";
 import Home from "./componets/Home";
+import Cart from "./componets/Cart";
 
 export class App extends Component {
   render() {
@@ -42,6 +43,16 @@ export class App extends Component {
                 <div>
                   
                   <Showcase />
+                </div>
+              )}
+            />
+
+<Route
+              path="/cart"
+              render={props => (
+                <div>
+                  <NavbarHome />
+                  <Cart />
                 </div>
               )}
             />

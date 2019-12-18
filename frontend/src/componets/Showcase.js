@@ -19,7 +19,7 @@ function Showcase() {
           <Route path="/showcase/contact" component={Contact}></Route>
           
 
-          <Route path="/:post_id" component={Post}></Route>
+          <Route path="/showcase/:post_id" component={Post}></Route>
         </Switch>
       </div>
     </BrowserRouter>
