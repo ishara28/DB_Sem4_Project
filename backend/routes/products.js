@@ -10,8 +10,8 @@ router.route("/").get((req, res) => {
   });
 });
 
-// Get All Products according to category
-router.route("/:category").get((req, res) => {
+//Get All Products according to category
+router.route("/category/:category").get((req, res) => {
   var category = req.params.category;
   const sql="SELECT * FROM product natural join category where category_name=?";
   mysqlConnection.query(
