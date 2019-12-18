@@ -24,7 +24,7 @@ export class Home extends Component {
       },
       () => {
         Axios.get(
-          "http://localhost:5000/products/"+this.state.category,
+          "http://localhost:5000/products/" + this.state.category,
           {}
         ).then(res => {
           this.setState({
@@ -40,12 +40,13 @@ export class Home extends Component {
     const postList = posts.length ? (
       posts.map(post => {
         return (
-          <div className="row">
-            <div className="post card" key={post.product_id}>
+          <div className="row" style={{width:"350px"}}>
+            <div className="center post card" key={post.product_id}>
               <div className="column ">
                 <div className="card-content col-4">
                   <Link to={"showcase/" + post.product_id}>
-                    <span className="card title">{post.title}</span>
+                    <span className="card title">{post.title}</span><br></br>
+                    <span className="card title">whight: {post.weight}g</span><br></br>
                     <span className="card title">{post.category_id}</span>
                   </Link>
 
@@ -57,7 +58,7 @@ export class Home extends Component {
         );
       })
     ) : (
-      <h1>No posts yet under {category}</h1>
+      <h1>No posts yet under {category} category</h1>
     );
 
     return (
