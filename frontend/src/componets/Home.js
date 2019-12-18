@@ -24,7 +24,7 @@ export class Home extends Component {
       },
       () => {
         Axios.get(
-          "http://localhost:5000/products/" + this.state.category,
+          "http://localhost:5000/products/category/" + this.state.category,
           {}
         ).then(res => {
           this.setState({
