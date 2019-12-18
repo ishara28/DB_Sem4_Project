@@ -11,11 +11,14 @@ router.route("/").get((req, res) => {
 });
 
 //Get All Products according to category
-router.route("/category/:id").get((req, res) => {
-  var categoryId = req.params.id;
+router.route("/:category").get((req, res) => {
+  var category = req.params.category;
+  
+
+  
+  const sql="SELECT * FROM product natural join category where category_name=?";
   mysqlConnection.query(
-    "SELECT * FROM product natural join category where category_id =" +
-      categoryId,
+    sql,category,
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);
@@ -39,16 +42,16 @@ router.post("/addproduct", (req, res) => {
 });
 
 //Get A Product Details with given product Id
-router.route("/:id").get((req, res) => {
-  var productId = req.params.id;
-  mysqlConnection.query(
-    "SELECT * FROM product WHERE product_id =" + productId,
-    (err, result, fields) => {
-      if (err) throw err;
-      res.json(result);
-    }
-  );
-});
+// router.route("/:id").get((req, res) => {
+//   var productId = req.params.id;
+//   mysqlConnection.query(
+//     "SELECT * FROM product WHERE product_id =" + productId,
+//     (err, result, fields) => {
+//       if (err) throw err;
+//       res.json(result);
+//     }
+//   );
+// });
 
 //Update details of product with given Product Id
 // router.route("/update/:id").post((req, res) => {
