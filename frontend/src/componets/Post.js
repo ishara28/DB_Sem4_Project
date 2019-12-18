@@ -8,6 +8,7 @@ class Post extends Component {
   };
   componentDidMount() {
     let id = this.props.match.params.post_id;
+    console.log("pased",id)
     
     Axios.get("http://localhost:5000/products/" + id).then(res => {
       this.setState({
