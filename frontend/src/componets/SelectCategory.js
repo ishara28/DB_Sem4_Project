@@ -38,7 +38,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Dropdown from "react-dropdown";
-import 'react-dropdown/style.css'
+import "react-dropdown/style.css";
 
 export class SelectCategory extends Component {
   constructor(props) {
@@ -50,18 +50,20 @@ export class SelectCategory extends Component {
       selectedCategory: ""
     };
   }
-
-  // componentDidMount() {
-  //   axios
-  //     .get("http://localhost:5000/category")
-  //     .then(res =>
-  //       this.setState({
-  //         categories2: res.data
-  //       })
-  //     )
-  //     .then(console.log(this.state.categories2))
-  //     .catch(err => console.log(err));
-  // }
+  //Get All Main Categories
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/category")
+      .then(res => {
+        this.setState({
+          categories2: res.data
+        });
+      })
+      .then(res => {
+        this.state.categories.map( category => this.setState)
+      })
+      .catch(err => console.log(err));
+  }
 
   handleSelectedCategory = option => {
     const selectedCategory = option.value;
@@ -72,7 +74,6 @@ export class SelectCategory extends Component {
     const { categories, selectedCategory } = this.state;
     return (
       <div className="container mt-2">
-        {this.state.categories2}
         <Dropdown
           className="row"
           options={categories}
