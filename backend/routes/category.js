@@ -39,7 +39,7 @@ router.post("/addcategory", (req, res) => {
 // });
 
 //Get Subcategories   with given category Id
-router.route("/:id").get((req, res) => {
+router.route("/subcategories/:id").get((req, res) => {
   var categoryId = req.params.id;
   var sql =
     "SELECT category.category_name FROM category INNER JOIN  (SELECT subcategory_id FROM category_subcategory NATURAL JOIN category WHERE category_id = ?) AS T1 ON category.category_id=T1.subcategory_id";
@@ -50,3 +50,4 @@ router.route("/:id").get((req, res) => {
 });
 
 module.exports = router;
+
