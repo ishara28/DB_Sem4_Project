@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const mysqlConnection = require("../connection");
 
-//Get All categories
+//Get All main categories
 router.route("/").get((req, res) => {
-  mysqlConnection.query("SELECT * FROM category", function(
+  mysqlConnection.query("SELECT DISTINCT category_id, category_name  FROM category_subcategory NATURAL JOIN category", function(
     err,
     result,
     fields
