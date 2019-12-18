@@ -78,7 +78,7 @@ export class SelectCategory extends Component {
           options={categories}
           onChange={this.handleSelectedCategory}
           value={selectedCategory}
-          placeholder="Select an Category      "
+          placeholder="Select a Category"
         />
       </div>
     );
