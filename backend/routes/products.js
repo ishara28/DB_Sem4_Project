@@ -10,11 +10,19 @@ router.route("/").get((req, res) => {
 });
 
 //Get All Products according to category
-router.route("/category/:id").get((req, res) => {
-  var categoryId = req.params.id;
+router.route("/category").get((req, res) => {
+  // var categoryName = req.params.categoryname;
+  // mysqlConnection.query(
+  //   "SELECT * FROM product natural join category where category_name  =" +
+  //     categoryId,
+  //   (err, result, fields) => {
+  //     if (err) throw err;
+  //     res.json(result);
+  //   }
+  // );
   mysqlConnection.query(
-    "SELECT * FROM product natural join category where category_id =" +
-      categoryId,
+    "SELECT * FROM product natural join category where category_name  = " +
+      " Car",
     (err, result, fields) => {
       if (err) throw err;
       res.json(result);
