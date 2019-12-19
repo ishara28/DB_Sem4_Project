@@ -3,14 +3,13 @@ const mysqlConnection = require("../connection");
 
 //Get All main categories
 router.route("/").get((req, res) => {
-  mysqlConnection.query("SELECT DISTINCT category_id, category_name  FROM category_subcategory NATURAL JOIN category", function(
-    err,
-    result,
-    fields
-  ) {
-    if (err) throw err;
-    res.json(result);
-  });
+  mysqlConnection.query(
+    "SELECT category_name FROM category WHERE category_id NOT IN (SELECT subcategory_id FROM category_subcategory)",
+    function(err, result, fields) {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
 });
 
 //Add a category
@@ -50,4 +49,3 @@ router.route("/subcategories/:id").get((req, res) => {
 });
 
 module.exports = router;
-
