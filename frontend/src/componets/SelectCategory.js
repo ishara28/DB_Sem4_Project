@@ -52,19 +52,12 @@ export class SelectCategory extends Component {
   }
   //Get All Main Categories
   componentDidMount() {
-    axios
-      .get("http://localhost:5000/category")
-      .then(res => {
-        this.setState({
-          categories2: res.data
-        });
-      })
-      .then(res => {
-        this.state.categories.map( category => this.setState)
-      })
-      .catch(err => console.log(err));
+    axios.get("http://localhost:5000/category").then(res => {
+      this.setState({
+        categories2: res.data
+      });
+    });
   }
-
   handleSelectedCategory = option => {
     const selectedCategory = option.value;
     this.setState({ selectedCategory });
