@@ -50,26 +50,40 @@ export class SelectCategory extends Component {
       selectedCategory: ""
     };
   }
-  //Get All Main Categories
+  // Get All Main Categories
+  // componentDidMount() {
+  //   axios
+  //     .get("http://localhost:5000/category")
+  //     .then(res => {
+  //       this.setState({
+  //         categories2: res.data.category_name
+  //       });
+  //     })
+  //     .then(console.log(this.state.categories2))
+  //     .catch(err => console.log(err));
+  // }
+
   componentDidMount() {
+    let initialCategories = [];
     axios.get("http://localhost:5000/category").then(res => {
-      this.setState({
-        categories2: res.data
+      initialCategories = res.data.map(category => {
+        return category.category_name;
       });
+      this.setState({
+        categories2: initialCategories
+      });
+      console.log(this.state.categories2);
     });
   }
-  handleSelectedCategory = option => {
-    const selectedCategory = option.value;
-    this.setState({ selectedCategory });
-  };
 
   render() {
-    const { categories, selectedCategory } = this.state;
+    const { categories, categories2, selectedCategory } = this.state;
+
     return (
       <div className="container mt-2">
         <Dropdown
           className="row"
-          options={categories}
+          options={categories2}
           onChange={this.handleSelectedCategory}
           value={selectedCategory}
           placeholder="Select a Category"
