@@ -25,7 +25,7 @@ class Post extends Component {
         <div className="center">
           <p>{this.state.post[0].title}</p>
           <p>weight {this.state.post[0].weight}g</p>
-          <Link to="/cart" className="waves-effect waves-light btn">Add to Cart</Link>
+          <Link to={"/cart/"+this.state.post[0].product_id} className="waves-effect waves-light btn">Add to Cart</Link>
         </div>
       </div>
     ) : (

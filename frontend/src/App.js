@@ -46,11 +46,11 @@ export class App extends Component {
             />
 
             <Route
-              path="/cart"
+              path="/cart:product_id"
               render={props => (
                 <div>
                   <NavbarHome />
-                  <Cart />
+                  <SignIn/>
                 </div>
               )}
             />

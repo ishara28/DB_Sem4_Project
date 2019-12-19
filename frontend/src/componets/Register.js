@@ -1,23 +1,51 @@
 import React, { Component } from "react";
 import Axios from "axios";
+// import Redirect from "react-router"
 
 export class Register extends Component {
   state = {
     first_name: null,
     last_name: null,
     email: null,
-    user_id:null,
+    user_id: null,
     contact_number: null,
-    address: null
+    address: null,
+    redirect:true
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    Axios.post("http://localhost:5000/user/adduser").then(res => {
-        this.setState({
-          post: res.data
-        });
-        console.log(this.state.first_name);
+    // Axios.post("http://localhost:5000/user/adduser"+this.state.first_name)
+    // var querystring = require('querystring');
+    // Axios.post("http://localhost:5000/user", querystring.stringify({ foo: 'bar' }))
+    //   Axios.post("http://localhost:5000/user",{
+    //     userName: 'Fred',
+    //     userEmail: 'Flintstone@gmail.com'
+    // })
+    // .then(function (response) {
+    //     console.log(response);
+    // })
+    // .catch(function (error) {
+    //     console.log(error);
+    // })
+    //   .then(res => {
+
+    //       console.log("respond fEnd");
+    //     });
+   const {first_name,last_name,email,user_id,contact_number,address}=this.state;
+    Axios.post("http://localhost:5000/user", {
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      user_id: user_id,
+      contact_number: contact_number,
+      address: address
+    })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log("this err",error);
       });
   };
 
@@ -27,7 +55,14 @@ export class Register extends Component {
     });
   };
   render() {
+
+    // if (this.state.redirect) {
+    //   return <Redirect to="/showcase" />;
+    // }
+
+
     return (
+      
       <div className="container" style={{ margin: "100px auto" }}>
         <div className="row card hoverable">
           <div className="card-content">

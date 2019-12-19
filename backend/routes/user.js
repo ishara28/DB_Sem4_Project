@@ -27,20 +27,24 @@ router.route("/users123").get((req, res) => {
 // });
 
 //Add a User
-router.route("/adduser:state").post( (req, res) => {
-  // var data = {
-  //   user_id: req.body.user_id,
-  //   first_name: req.body.first_name,
-  //   last_name: req.body.last_name,
-  //   email: req.body.email,
-  //   address: req.body.address,
-  //   contact_number: req.body.contact_number
-  // };
-  // var sql = "INSERT INTO product SET ?";
-  // mysqlConnection.query(sql, data, (err, result) => {
-  //   if (err) throw err;
-  //   res.json("1 Row Inserted!");
-  // });
+router.route("/").post( (req, res) => {
+  // var para=req.params.id;
+  var para=req.body.email;
+
+  console.log(para)
+  var data = {
+    user_id: req.body.user_id,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    address: req.body.address,
+    contact_number: req.body.contact_number
+  };
+  var sql = "INSERT INTO user SET ?";
+  mysqlConnection.query(sql, data, (err, result) => {
+    if (err) throw err;
+    res.json("1 Row Inserted!");
+  });
   console.log(req.body.name)
 });
 
