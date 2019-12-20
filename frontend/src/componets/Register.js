@@ -42,10 +42,15 @@ export class Register extends Component {
       address: address
     })
       .then(function(response) {
-        console.log(response);
+        if(response.data=="Enter unique user name"){
+          console.log("78564212112")
+
+        }else{
+          console.log(response)
+        }
       })
       .catch(function(error) {
-        console.log("this err",error);
+        console.log(error);
       });
   };
 
@@ -75,7 +80,7 @@ export class Register extends Component {
                     onChange={this.handleChange}
                     value={this.state.first_name}
                     name="first_name"
-                    placeholder="first name*"
+                    placeholder="first name*" required
                   ></input>
                 </div>
               </div>
@@ -99,7 +104,7 @@ export class Register extends Component {
                     onChange={this.handleChange}
                     value={this.state.user_id}
                     name="user_id"
-                    placeholder=" user id*"
+                    placeholder=" user id*" required
                   ></input>
                 </div>
               </div>
