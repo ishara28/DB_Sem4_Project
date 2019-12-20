@@ -13,8 +13,7 @@ router.route("/").get((req, res) => {
 //Get All Products according to category
 router.route("/category/:category").get((req, res) => {
   var category = req.params.category;
-  const sql =
-    "SELECT * FROM product natural join category where category_name=?";
+  const sql ="SELECT * FROM product natural join category where category_name=?";
   mysqlConnection.query(sql, category, (err, result, fields) => {
     if (err) throw err;
     res.json(result);
