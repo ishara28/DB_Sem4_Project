@@ -50,18 +50,6 @@ export class SelectCategory extends Component {
       selectedCategory: ""
     };
   }
-  // Get All Main Categories
-  // componentDidMount() {
-  //   axios
-  //     .get("http://localhost:5000/category")
-  //     .then(res => {
-  //       this.setState({
-  //         categories2: res.data.category_name
-  //       });
-  //     })
-  //     .then(console.log(this.state.categories2))
-  //     .catch(err => console.log(err));
-  // }
 
   componentDidMount() {
     let initialCategories = [];
