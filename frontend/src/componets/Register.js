@@ -44,7 +44,7 @@ export class Register extends Component {
       .then(function(response) {
         if(response.data=="Enter unique user name"){
           console.log("78564212112")
-
+          this.props.history.push("13")
         }else{
           console.log(response)
         }

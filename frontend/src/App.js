@@ -45,17 +45,18 @@ export class App extends Component {
               )}
             />
 
-            <Route
+            {/* <Route
               path="/cart:product_id"
               render={props => (
                 <div>
                   <NavbarHome />
-                  <SignIn/>
+                  <Cart/>
                 </div>
               )}
-            />
+            /> */}
           </switch>
         </BrowserRouter>
+        {/* <Cart/> */}
       </div>
     );
   }
