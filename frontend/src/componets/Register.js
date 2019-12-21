@@ -10,7 +10,7 @@ export class Register extends Component {
     user_id: null,
     contact_number: null,
     address: null,
-    redirect: true
+    redirect:true
   };
 
   handleSubmit = e => {
@@ -32,14 +32,7 @@ export class Register extends Component {
 
     //       console.log("respond fEnd");
     //     });
-    const {
-      first_name,
-      last_name,
-      email,
-      user_id,
-      contact_number,
-      address
-    } = this.state;
+   const {first_name,last_name,email,user_id,contact_number,address}=this.state;
     Axios.post("http://localhost:5000/user", {
       first_name: first_name,
       last_name: last_name,
@@ -49,10 +42,15 @@ export class Register extends Component {
       address: address
     })
       .then(function(response) {
-        console.log(response);
+        if(response.data=="Enter unique user name"){
+          console.log("78564212112")
+          this.props.history.push("13")
+        }else{
+          console.log(response)
+        }
       })
       .catch(function(error) {
-        console.log("this err", error);
+        console.log(error);
       });
   };
 
@@ -66,7 +64,9 @@ export class Register extends Component {
     //   return <Redirect to="/showcase" />;
     // }
 
+
     return (
+      
       <div className="container" style={{ margin: "100px auto" }}>
         <div className="row card hoverable">
           <div className="card-content">
@@ -79,7 +79,7 @@ export class Register extends Component {
                     onChange={this.handleChange}
                     value={this.state.first_name}
                     name="first_name"
-                    placeholder="first name*"
+                    placeholder="first name*" required
                   ></input>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export class Register extends Component {
                     onChange={this.handleChange}
                     value={this.state.user_id}
                     name="user_id"
-                    placeholder=" user id*"
+                    placeholder=" user id*" required
                   ></input>
                 </div>
               </div>

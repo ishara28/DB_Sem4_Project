@@ -3,7 +3,8 @@ const mysqlConnection = require("../connection");
 
 //Show All Users
 router.route("/users123").get((req, res) => {
-  mysqlConnection.query("SELECT * FROM product", function(err, result, fields) {
+  const sql = "SELECT * FROM product";
+  mysqlConnection.query(sql, function(err, result) {
     if (err) throw err;
     res.json(result);
   });
@@ -28,10 +29,6 @@ router.route("/users123").get((req, res) => {
 
 //Add a User
 router.route("/").post((req, res) => {
-  // var para=req.params.id;
-  var para = req.body.email;
-
-  console.log(para);
   var data = {
     user_id: req.body.user_id,
     first_name: req.body.first_name,
@@ -40,12 +37,24 @@ router.route("/").post((req, res) => {
     address: req.body.address,
     contact_number: req.body.contact_number
   };
-  var sql = "INSERT INTO user SET ?";
-  mysqlConnection.query(sql, data, (err, result) => {
+
+  const sql1 = "SELECT * from  user where user_id=?";
+  mysqlConnection.query(sql1, data.user_id, (err, result) => {
     if (err) throw err;
-    res.json("1 Row Inserted!");
+    if (result.length > 0) {
+      res.json("Enter unique user name");
+
+      // console.log(req.body.name)
+    } else {
+      var sql2 = "INSERT INTO user SET ?";
+      mysqlConnection.query(sql2, data, (err, result) => {
+        if (err) throw err;
+        else {
+          res.json("1 Row Inserted");
+        }
+      });
+    }
   });
-  console.log(req.body.name);
 });
 
 module.exports = router;
