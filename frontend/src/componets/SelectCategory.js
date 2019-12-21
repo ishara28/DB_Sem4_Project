@@ -51,18 +51,18 @@ export class SelectCategory extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   let initialCategories = [];
-  //   axios.get("http://localhost:5000/category").then(res => {
-  //     initialCategories = res.data.map(category => {
-  //       return category.category_name;
-  //     });
-  //     this.setState({
-  //       categories2: initialCategories
-  //     });
-  //     console.log(this.state.categories2);
-  //   });
-  // }
+  componentDidMount() {
+    let initialCategories = [];
+    axios.get("http://localhost:5000/category").then(res => {
+      initialCategories = res.data.map(category => {
+        return category.category_name;
+      });
+      this.setState({
+        categories2: initialCategories
+      });
+      console.log(this.state.categories2);
+    });
+  }
 
   render() {
     const { categories, categories2, selectedCategory } = this.state;
