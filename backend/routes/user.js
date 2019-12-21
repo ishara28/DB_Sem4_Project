@@ -29,7 +29,6 @@ router.route("/users123").get((req, res) => {
 
 //Add a User
 router.route("/").post((req, res) => {
-
   var data = {
     user_id: req.body.user_id,
     first_name: req.body.first_name,
