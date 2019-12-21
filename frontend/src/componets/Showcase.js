@@ -18,16 +18,19 @@ function Showcase() {
           <Route exact path="/showcase" component={Home}></Route>
           <Route path="/showcase/about" component={About}></Route>
           <Route path="/showcase/contact" component={Contact}></Route>
-          <Route
-            path="/cart:product_id"
-            render={props => (
-              <div>
-                <Cart />
-              </div>
-            )}
-          />
+          <Route exact path="/showcase/:post_id" component={Post}></Route>
 
-          <Route path="/showcase/:post_id" component={Post}></Route>
+
+          <Route
+              exact path="/showcase/product/cart/:product_id" 
+              render={props => (
+                <div>
+                  <Cart />
+                </div>
+              )}
+            />
+
+        
         </Switch>
       </div>
     </BrowserRouter>

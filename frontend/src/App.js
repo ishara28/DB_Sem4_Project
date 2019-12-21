@@ -44,19 +44,9 @@ export class App extends Component {
                 </div>
               )}
             />
-
-            {/* <Route
-              path="/cart:product_id"
-              render={props => (
-                <div>
-                  <NavbarHome />
-                  <Cart/>
-                </div>
-              )}
-            /> */}
+          
           </switch>
         </BrowserRouter>
-        {/* <Cart/> */}
       </div>
     );
   }

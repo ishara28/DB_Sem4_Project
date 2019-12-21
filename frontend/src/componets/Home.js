@@ -15,25 +15,26 @@ export class Home extends Component {
         posts: res.data
       });
     });
+    console.log("ff")
   }
 
-  selectCategory = category => {
-    this.setState(
-      {
-        category: category
-      },
-      () => {
-        Axios.get(
-          "http://localhost:5000/products/category/" + this.state.category,
-          {}
-        ).then(res => {
-          this.setState({
-            posts: res.data
-          });
-        });
-      }
-    );
-  };
+  // selectCategory = category => {
+  //   this.setState(
+  //     {
+  //       category: category
+  //     },
+  //     () => {
+  //       Axios.get(
+  //         "http://localhost:5000/products/category/" + this.state.category,
+  //         {}
+  //       ).then(res => {
+  //         this.setState({
+  //           posts: res.data
+  //         });
+  //       });
+  //     }
+  //   );
+  // };
 
   render() {
     const { posts, category } = this.state;

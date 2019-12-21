@@ -3,6 +3,7 @@ const mysqlConnection = require("../connection");
 
 //Get All Products
 router.route("/").get((req, res) => {
+  console.log("received")
   const qry = "SELECT * FROM product";
   mysqlConnection.query(qry, function(err, result, fields) {
     if (err) throw err;
