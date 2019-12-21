@@ -1,40 +1,3 @@
-// import React, { Component } from "react";
-
-// export class SelectCategory extends Component {
-//   state = {
-//     category: null
-//   };
-
-//   handleSelect = event => {
-//     this.setState({
-//       category: event.target.value
-//     },function(){
-//       this.props.selectCategory(this.state.category)
-//     });
-//   };
-
-//   render() {
-//     return (
-//       <div>
-//         <div style={{ color: "blue" }}>
-//           <p>Select category</p>
-//           <select
-//             className="browser-default"
-//             value={this.state.category}
-//             onChange={this.handleSelect}
-//           >
-//             <option value="Electronic">Electronic</option>
-//             <option value="Toy">Toy</option>
-//             <option value="Mobile">Mobile</option>
-//           </select>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// export default SelectCategory;
-
 import React, { Component } from "react";
 import axios from "axios";
 import Dropdown from "react-dropdown";
@@ -45,8 +8,8 @@ export class SelectCategory extends Component {
     super(props);
 
     this.state = {
-      categories: ["Ishara", "Asanka", "Dilanka", "Sajeewa"],
-      categories2: [],
+      cat: "ishara",
+      categories: [],
       selectedCategory: ""
     };
   }
@@ -58,20 +21,36 @@ export class SelectCategory extends Component {
         return category.category_name;
       });
       this.setState({
-        categories2: initialCategories
+        categories: initialCategories
       });
-      console.log(this.state.categories2);
+      console.log(this.state.categories);
     });
   }
 
+  handleSelectedCategory = option => {
+    const selectedCategory = option.value;
+    this.setState(
+      {
+        selectedCategory: selectedCategory
+      },
+      () => {
+        this.sendData();
+      }
+    );
+  };
+
+  sendData = () => {
+    this.props.parentCallback(this.state.selectedCategory);
+  };
+
   render() {
-    const { categories, categories2, selectedCategory } = this.state;
+    const { categories, selectedCategory } = this.state;
 
     return (
       <div className="container mt-2">
         <Dropdown
           className="row"
-          options={categories2}
+          options={categories}
           onChange={this.handleSelectedCategory}
           value={selectedCategory}
           placeholder="Select a Category"
