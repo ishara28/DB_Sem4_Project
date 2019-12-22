@@ -4,11 +4,12 @@ import ShowCartItems from "./ShowCartItems";
 
 export class Cart extends Component {
   state = {
+    total: 0,
     products: [
-      { product_id: "12", name: "Apple phone", qty: 1 },
-      { product_id: "13", name: "SAMSUNG phone", qty: 2 },
-      { product_id: "14", name: "NOKIA phone", qty: 3 },
-      { product_id: "15", name: "MI phone", qty: 4 }
+      { product_id: "12", price: 1200, name: "Apple phone", qty: 1 },
+      { product_id: "13", price: 1600, name: "SAMSUNG phone", qty: 2 },
+      { product_id: "14", price: 1450, name: "NOKIA phone", qty: 3 },
+      { product_id: "15", price: 780, name: "MI phone", qty: 4 }
     ]
   };
 
@@ -40,20 +41,29 @@ export class Cart extends Component {
   changeQty = (product_id, e) => {
     const product_change_qty = this.state.products.map(item => {
       if (item.product_id != product_id) {
+        // this.state.total=this.state.total+10
+
         return item;
       } else if (e.target.name == "+") {
         item.qty = item.qty + 1;
+        this.state.total = this.state.total + item.price * item.qty;
+
+        // console.log(tot)
         return item;
       } else if (item.qty > 1) {
         item.qty = item.qty - 1;
+        this.state.total = this.state.total - item.price * item.qty;
+
         return item;
       }
     });
-
+    console.log(this.state.total);
     this.setState({
-      // products: [...product_change_qty, this.state.products.values]
+      //
     });
   };
+
+  calculateTotal = (product_id, e) => {};
 
   render() {
     return (
@@ -62,7 +72,12 @@ export class Cart extends Component {
           products={this.state.products}
           remove={this.removeProduct}
           changeQty={this.changeQty}
+          calculateTotal={this.calculateTotal}
         />
+        <div className="right">
+          <button className="waves-effect waves-light btn">order now!</button>
+        </div>
+        <h1>{this.state.total}</h1>
       </div>
     );
   }
