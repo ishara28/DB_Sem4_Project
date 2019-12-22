@@ -55,7 +55,7 @@ router.post("/log", (request, response) => {
         if (results.length > 0) {
           request.session.loggedin = true;
           request.session.email = email;
-          response.send(results);
+          response.send("Succesfully Logged In!");
         } else {
           response.send("Incorrect email and/or Password!");
         }

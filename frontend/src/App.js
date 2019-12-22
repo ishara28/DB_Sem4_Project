@@ -44,7 +44,6 @@ export class App extends Component {
                 </div>
               )}
             />
-          
           </switch>
         </BrowserRouter>
       </div>

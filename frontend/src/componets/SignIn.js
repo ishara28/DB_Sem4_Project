@@ -1,14 +1,26 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export class SignIn extends Component {
   state = {
-    user_name: null,
-    password: null
+    email: "",
+    password: "",
+    response: ""
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.user_name, this.state.password);
+    const loginUser = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    console.log(loginUser);
+
+    axios.post("http://localhost:5000/user/log", loginUser).then(res => {
+      if (res.data == "Succesfully Logged In!") {
+        window.location = "/showcase";
+      }
+    });
   };
 
   handleChange = e => {
@@ -22,15 +34,17 @@ export class SignIn extends Component {
         <div className="row card hoverable">
           <div className="card-content">
             <h4 class="center blue-text">SignIn Form</h4>
+            <h5>{this.state.response}</h5>
             <form onSubmit={this.handleSubmit} className="row s12">
               <div className="col s12">
                 <div className="input-field">
                   <input
-                    type="text"
+                    type="email"
                     onChange={this.handleChange}
-                    value={this.state.user_name}
-                    name="user_name"
-                    placeholder="username*"
+                    value={this.state.email}
+                    name="email"
+                    placeholder="Email*"
+                    required
                   ></input>
                 </div>
               </div>
@@ -42,7 +56,8 @@ export class SignIn extends Component {
                     onChange={this.handleChange}
                     value={this.state.password}
                     name="password"
-                    placeholder="password*"
+                    placeholder="Password*"
+                    required
                   ></input>
                 </div>
               </div>

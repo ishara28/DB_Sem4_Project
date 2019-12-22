@@ -31,16 +31,11 @@ export class Register extends Component {
     };
     console.log(newUser);
 
-    axios.post("http://localhost:5000/user/register", newUser).then(res =>
-      this.setState(
-        {
-          response: res.data
-        },
-        () => {
-          console.log(this.state.response);
-        }
-      )
-    );
+    axios.post("http://localhost:5000/user/register", newUser).then(res => {
+      if (res.data == "User Registered!") {
+        window.location = "/signup";
+      }
+    });
 
     // window.location = "/";
   };
