@@ -16,7 +16,6 @@ router.route("/register").post((req, res) => {
     user_id: req.body.user_id,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
-    username: req.body.username,
     email: req.body.email,
     address: req.body.address,
     contact_number: req.body.contact_number,
@@ -25,12 +24,12 @@ router.route("/register").post((req, res) => {
 
   var password2 = req.body.password2;
 
-  const sql1 = "SELECT * from  user where user_id=?";
-  mysqlConnection.query(sql1, data.user_id, (err, result) => {
+  const sql1 = "SELECT * from  user where email =? ";
+  mysqlConnection.query(sql1, data.email, (err, result) => {
     if (err) throw err;
     if (result.length > 0) {
-      res.json("Enter unique user name");
-    } else if (data.password == password2 ) {
+      res.json("Enter unique email");
+    } else if (data.password == password2) {
       var sql2 = "INSERT INTO user SET ?";
       mysqlConnection.query(sql2, data, (err, result) => {
         if (err) throw err;
@@ -56,11 +55,10 @@ router.post("/log", (request, response) => {
         if (results.length > 0) {
           request.session.loggedin = true;
           request.session.email = email;
-          response.json(results);
+          response.send(results);
         } else {
           response.send("Incorrect email and/or Password!");
         }
-
         response.end();
       }
     );
