@@ -12,57 +12,9 @@ export class Register extends Component {
     contact_number: "",
     password: "",
     password2: "",
-    redirect: true
+    redirect: true,
+    response: ""
   };
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  // Axios.post("http://localhost:5000/user/adduser"+this.state.first_name)
-  // var querystring = require('querystring');
-  // Axios.post("http://localhost:5000/user", querystring.stringify({ foo: 'bar' }))
-  //   Axios.post("http://localhost:5000/user",{
-  //     userName: 'Fred',
-  //     userEmail: 'Flintstone@gmail.com'
-  // })
-  // .then(function (response) {
-  //     console.log(response);
-  // })
-  // .catch(function (error) {
-  //     console.log(error);
-  // })
-  //   .then(res => {
-
-  //       console.log("respond fEnd");
-  //     });
-  //   const {
-  //     first_name,
-  //     last_name,
-  //     email,
-  //     user_id,
-  //     contact_number,
-  //     address
-  //   } = this.state;
-  //   Axios.post("http://localhost:5000/user", {
-  //     first_name: first_name,
-  //     last_name: last_name,
-  //     email: email,
-  //     user_id: user_id,
-  //     contact_number: contact_number,
-  //     address: address,
-  //     password: ""
-  //   })
-  //     .then(function(response) {
-  //       if (response.data == "Enter unique user name") {
-  //         console.log("78564212112");
-  //         this.props.history.push("13");
-  //       } else {
-  //         console.log(response);
-  //       }
-  //     })
-  //     .catch(function(error) {
-  //       console.log(error);
-  //     });
-  // };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -79,9 +31,16 @@ export class Register extends Component {
     };
     console.log(newUser);
 
-    axios
-      .post("http://localhost:5000/user/register", newUser)
-      .then(res => console.log(res.data));
+    axios.post("http://localhost:5000/user/register", newUser).then(res =>
+      this.setState(
+        {
+          response: res.data
+        },
+        () => {
+          console.log(this.state.response);
+        }
+      )
+    );
 
     // window.location = "/";
   };
@@ -91,6 +50,7 @@ export class Register extends Component {
       [e.target.name]: e.target.value
     });
   };
+
   render() {
     // if (this.state.redirect) {
     //   return <Redirect to="/showcase" />;
@@ -197,6 +157,7 @@ export class Register extends Component {
                   Register<i class="material-icons right"></i>
                 </button>
               </div>
+              <h5>{this.state.response}</h5>
             </form>
           </div>
         </div>
