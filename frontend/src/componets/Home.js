@@ -18,7 +18,9 @@ export class Home extends Component {
   }
 
   getProductsWithCategory() {
-    Axios.get("http://localhost:5000/products/category/" + this.state.category).then(res => {
+    Axios.get(
+      "http://localhost:5000/products/category/" + this.state.category
+    ).then(res => {
       this.setState({
         posts: res.data
       });
@@ -61,7 +63,7 @@ export class Home extends Component {
         );
       })
     ) : (
-      <h1>No posts yet under {category} category</h1>
+      <h4>No posts yet under {category} category</h4>
     );
 
     return (
