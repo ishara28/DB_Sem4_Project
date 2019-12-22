@@ -37,4 +37,6 @@ function ShowCartItems({ products, remove,changeQty}) {
 }
 
 
-export default ShowCartItems;
+
+export  default ShowCartItems;
+
