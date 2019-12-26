@@ -11,6 +11,21 @@ import Cart from "./componets/Cart";
 export class App extends Component {
   render() {
     return (
+      <BrowserRouter>
+      <div className="App">
+        <Navbar/>
+        <Switch>
+          <Route path="/home" component={Home}/>
+          <Route path="/contact" component={Contact}/>
+          <Route path="/about" component={About}/>
+          <Route path="/:post_id" component={Post}/>
+        </Switch>
+      </div>
+    </BrowserRouter>
+    )
+
+    
+    /*return (
       <div>
         <BrowserRouter>
           <switch>
@@ -48,7 +63,7 @@ export class App extends Component {
           </switch>
         </BrowserRouter>
       </div>
-    );
+    );*/
   }
 }
 
