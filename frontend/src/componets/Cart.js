@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import Item from "./Item";
 import ShowCartItems from "./ShowCartItems";
+import { connect } from "react-redux";
+import { stat } from "fs";
 
 export class Cart extends Component {
-  state = {
-    total: 0,
-    products: [
-      { product_id: "12", price: 1200, name: "Apple phone", qty: 1 },
-      { product_id: "13", price: 1600, name: "SAMSUNG phone", qty: 2 },
-      { product_id: "14", price: 1450, name: "NOKIA phone", qty: 3 },
-      { product_id: "15", price: 780, name: "MI phone", qty: 4 }
-    ]
-  };
+  // state = {
+  //   user_id:null,
+  //   total: 0,
+  //   products: [
+  //     { product_id: "12", price: 1200, name: "Apple phone", qty: 1 },
+  //     { product_id: "13", price: 1600, name: "SAMSUNG phone", qty: 2 },
+  //     { product_id: "14", price: 1450, name: "NOKIA phone", qty: 3 },
+  //     { product_id: "15", price: 780, name: "MI phone", qty: 4 }
+  //   ]
+  // };
 
   componentDidMount() {
     //     var id = this.props.match.params.product_id;
@@ -23,7 +26,7 @@ export class Cart extends Component {
     //   });
     //   console.log(res);
     // });
-    console.log("fk");
+    console.log(this.props.products);
   }
 
   addProduct = product => {};
@@ -39,6 +42,7 @@ export class Cart extends Component {
   };
 
   changeQty = (product_id, e) => {
+    console.log("just blw", this.state.total);
     const product_change_qty = this.state.products.map(item => {
       if (item.product_id != product_id) {
         // this.state.total=this.state.total+10
@@ -57,7 +61,7 @@ export class Cart extends Component {
         return item;
       }
     });
-    console.log(this.state.total);
+    console.log("tot", this.state.total);
     this.setState({
       //
     });
@@ -77,10 +81,15 @@ export class Cart extends Component {
         <div className="right">
           <button className="waves-effect waves-light btn">order now!</button>
         </div>
-        <h1>{this.state.total}</h1>
+        <h1>Total:{this.state.total}Rs</h1>
       </div>
     );
   }
 }
 
-export default Cart;
+const mapToProps = (state) => {
+  return {
+    products: state.products
+  };
+};
+export default connect(mapToProps)(Cart);

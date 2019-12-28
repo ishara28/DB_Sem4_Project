@@ -5,6 +5,17 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./materialize/css/materialize.min.css";
 // import "bootstrap/dist/css/bootstrap.css";
+import { createStore } from "react";
+import cartReducer from "./reducers/cartReducer";
+import { Provider } from "react-redux";
+// const store = createStore(cartReducer);
+
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>,
+//   document.getElementById("root")
+// );
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

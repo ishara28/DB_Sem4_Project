@@ -5,7 +5,7 @@ const mysqlConnection = require("../connection");
 router.route("/").get((req, res) => {
   console.log("received")
   const qry = "SELECT * FROM product";
-  mysqlConnection.query(qry, function(err, result, fields) {
+  mysqlConnection.query(qry, function(err, result) {
     if (err) throw err;
     res.json(result);
   });
