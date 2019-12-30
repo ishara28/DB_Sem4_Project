@@ -43,17 +43,45 @@ router.route("/additems").post((req, res) => {
       (err, result) => {
         if (err) throw err;
         req.session.orderId = orderItem.order_id;
+        res.json({
+          msg: "Order Item Added!"
+        });
       }
     );
   } else {
     res.json({ msg: "Please Log into add items" });
-    res.send({ msg: "Please Log into add items" });
   }
 });
 
 //make order
-router.route("/makeorder").get((req, res) => {
-  res.json(req.session.orderId);
+router.route("/makeorder").post((req, res) => {
+  if (req.session.loggedUser && req.session.orderId) {
+    var orderDetails = {
+      order_id: req.session.orderId,
+      user_id: req.session.loggedUser[0].user_id,
+      payment_method: req.body.payment_method,
+      delivery_method: req.body.delivery_method,
+      order_date_time: new Date(Date.now()).toLocaleString(),
+      address: req.body.address,
+      status: "not_delivered"
+    };
+
+    mysqlConnection.query(
+      "INSERT INTO orders SET ?",
+      orderDetails,
+      (err, result) => {
+        if (err) throw err;
+        req.session.orderId = null;
+        res.json({
+          msg: "Order  Added to Deliver!"
+        });
+      }
+    );
+  } else {
+    res.json({
+      msg: "Log in to place order"
+    });
+  }
 });
 
 module.exports = router;
