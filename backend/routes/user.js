@@ -1,15 +1,6 @@
 const mysqlConnection = require("../connection");
 const router = require("express").Router();
-// var session = require("express-session");
 const uuidv4 = require("uuid/v4");
-
-// router.use(
-//   session({
-//     secret: "secret",
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );
 
 //Register user
 router.route("/register").post((req, res) => {
@@ -54,7 +45,7 @@ router.post("/log", (request, response) => {
       [email, password],
       function(error, results, fields) {
         if (results.length > 0) {
-          request.session.loggedin = true;
+          request.session.loggedIn = true;
           request.session.loggedUser = results;
           response.send({ msg: "Succesfully Logged In!", loggedUser: results });
         } else {
@@ -72,14 +63,14 @@ router.post("/log", (request, response) => {
 //Get isLogged
 router.get("/islogged", (request, response) => {
   response.send({
-    isLogged: request.session.loggedin,
+    isLogged: request.session.loggedIn,
     loggedUser: request.session.loggedUser
   });
 });
 
 //Logout
 router.get("/logout", (request, response) => {
-  request.session.loggedin = false;
+  request.session.loggedIn = false;
   request.session.loggedUser = null;
   response.send("You Logged Out!");
 });

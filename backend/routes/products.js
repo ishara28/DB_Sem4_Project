@@ -66,5 +66,9 @@ router.route("/update/:id").post((req, res) => {
   });
 });
 
+//Test Session variables
+router.route("/getsession").get((req, res) => {
+  res.json(req.session);
+});
 
 module.exports = router;

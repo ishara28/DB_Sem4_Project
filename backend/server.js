@@ -22,9 +22,11 @@ const PORT = process.env.PORT || 5000;
 const productsRouter = require("./routes/products");
 const categoryRouter = require("./routes/category");
 const userRouter = require("./routes/user");
+const orderRouter = require("./routes/order");
 
 app.use("/products", productsRouter);
 app.use("/category", categoryRouter);
 app.use("/user", userRouter);
+app.use("/order", orderRouter);
 
 app.listen(PORT, () => console.log("Server is running on Port : " + PORT));
