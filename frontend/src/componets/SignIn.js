@@ -17,8 +17,12 @@ export class SignIn extends Component {
     console.log(loginUser);
 
     axios.post("http://localhost:5000/user/log", loginUser).then(res => {
-      if (res.data == "Succesfully Logged In!") {
+      if (res.data.msg == "Succesfully Logged In!") {
         window.location = "/showcase";
+      } else {
+        this.setState({
+          response: res.data.msg
+        });
       }
     });
   };

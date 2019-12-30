@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const mysqlConnection = require("../connection");
+var session = require("express-session");
 
 //Get All Products
 router.route("/").get((req, res) => {
-  console.log("received")
+  console.log("received");
   const qry = "SELECT * FROM product";
   mysqlConnection.query(qry, function(err, result, fields) {
     if (err) throw err;
@@ -14,7 +15,8 @@ router.route("/").get((req, res) => {
 //Get All Products according to category
 router.route("/category/:category").get((req, res) => {
   var category = req.params.category;
-  const sql ="SELECT * FROM product natural join category where category_name=?";
+  const sql =
+    "SELECT * FROM product natural join category where category_name=?";
   mysqlConnection.query(sql, category, (err, result, fields) => {
     if (err) throw err;
     res.json(result);
@@ -63,5 +65,6 @@ router.route("/update/:id").post((req, res) => {
     );
   });
 });
+
 
 module.exports = router;

@@ -34,6 +34,10 @@ export class Register extends Component {
     axios.post("http://localhost:5000/user/register", newUser).then(res => {
       if (res.data == "User Registered!") {
         window.location = "/signup";
+      }else{
+        this.setState({
+          response : res.data
+        })
       }
     });
 
