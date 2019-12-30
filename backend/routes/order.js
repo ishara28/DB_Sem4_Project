@@ -79,7 +79,7 @@ router.route("/makeorder").post((req, res) => {
     );
   } else {
     res.json({
-      msg: "Log in to place order"
+      msg: "Log in to place order or add items to order!"
     });
   }
 });
