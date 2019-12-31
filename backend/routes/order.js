@@ -3,12 +3,16 @@ const mysqlConnection = require("../connection");
 
 //Get all my orders
 router.route("/myorders").get((req, res) => {
-  var user_id = req.session.loggedUser[0].user_id;
-  var sql = "SELECT * FROM orders WHERE user_id ?";
-  mysqlConnection.query(sql, user_id, category, (err, result, fields) => {
-    if (err) throw err;
-    res.json(result);
-  });
+  if (req.session.loggedUser) {
+    var user_id = req.session.loggedUser[0].user_id;
+    var sql = "SELECT * FROM orders WHERE user_id = ?";
+    mysqlConnection.query(sql, user_id, (err, result, fields) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  } else {
+    res.json({ msg: "Login First!" });
+  }
 });
 
 //Get all past orders
