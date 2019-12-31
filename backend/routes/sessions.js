@@ -6,7 +6,10 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/test").get((req, res) => {
-  let date_ob = new Date(Date.now()).toLocaleString();
+  let date_ob = new Date()
+    .toISOString()
+    .replace(/T/, " ")
+    .replace(/\..+/, "");
   res.json(date_ob);
 });
 
