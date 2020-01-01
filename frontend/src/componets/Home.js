@@ -39,6 +39,7 @@ export class Home extends Component {
   };
 
   render() {
+    console.log(this.props.loggedUser);
     const { posts, category } = this.state;
     const postList = posts.length ? (
       posts.map(post => {
