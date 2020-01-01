@@ -25,6 +25,7 @@ const categoryRouter = require("./routes/category");
 const userRouter = require("./routes/user");
 const orderRouter = require("./routes/order");
 const sessionRouter = require("./routes/sessions");
+const adminRouter = require('./routes/admin')
 
 
 app.use("/products", productsRouter);
