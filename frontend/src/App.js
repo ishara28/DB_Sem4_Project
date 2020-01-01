@@ -7,9 +7,6 @@ import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./componets/Navbar";
 import Home from "./componets/Home";
 import Cart from "./componets/Cart";
-import { Provider } from "react-redux";
-import store from "./redux/store";
-import { CakeContainer } from "./componets/CakeContainer";
 export class App extends Component {
   render() {
     return (

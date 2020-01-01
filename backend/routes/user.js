@@ -38,6 +38,7 @@ router.route("/register").post((req, res) => {
 router.post("/log", (request, response) => {
   var email = request.body.email;
   var password = request.body.password;
+
   if (email && password) {
     mysqlConnection.query(
       "SELECT * FROM user WHERE email = ? AND password = ?",
@@ -46,15 +47,19 @@ router.post("/log", (request, response) => {
         if (results.length > 0) {
           request.session.loggedIn = true;
           request.session.loggedUser = results;
-          // request.session.cart_id = uuidv4();
-          // var cartData = {
-          //   cart_id: request.session.cart_id,
-          //   user_id: request.session.loggedUser[0].user_id
-          // };
-          // var sql2 = "INSERT INTO cart SET ?";
-          // mysqlConnection.query(sql2, cartData, (err, result) => {
-          //   if (err) throw err;
-          // });
+          request.session.cart_id = uuidv4();
+          var cartData = {
+            cart_id: request.session.cart_id,
+            user_id: request.session.loggedUser[0].user_id
+          };
+          mysqlConnection.query(
+            "INSERT INTO cart SET ?",
+            cartData,
+            (err, results) => {
+              if (err) throw err;
+            }
+          );
+
           response.send({ msg: "Succesfully Logged In!", loggedUser: results });
         } else {
           response.send({ msg: "Incorrect email and/or Password!" });
@@ -64,7 +69,6 @@ router.post("/log", (request, response) => {
     );
   } else {
     response.send("Please enter email and Password!");
-    response.end();
   }
 });
 
