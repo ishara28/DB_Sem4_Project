@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const mysqlConnection = require("../connection");
+const uuidv4 = require("uuid/v4");
 
 //Get all my orders
 router.route("/myorders").get((req, res) => {
@@ -37,11 +38,20 @@ router.route("/pendingorders").get((req, res) => {
 
 //Add items to an order
 router.route("/additems").post((req, res) => {
-  var orderItem = {
-    sku: req.body.sku,
-    order_id: req.body.order_id,
-    quantity: req.body.quantity
-  };
+  if (req.session.cart_id) {
+    var orderItem = {
+      sku: req.body.sku,
+      cart_id: req.session.cart_id,
+      quantity: req.body.quantity
+    };
+  } else {
+    request.session.cart_id = uuidv4();
+    var orderItem = {
+      sku: req.body.sku,
+      cart_id: req.session.cart_id,
+      quantity: req.body.quantity
+    };
+  }
 
   if (req.session.loggedUser) {
     mysqlConnection.query(
@@ -66,9 +76,10 @@ router.route("/makeorder").post((req, res) => {
     .toISOString()
     .replace(/T/, " ")
     .replace(/\..+/, "");
-  if (req.session.loggedUser && req.session.orderId) {
+  if (req.session.loggedUser) {
     var orderDetails = {
-      order_id: req.session.orderId,
+      order_id: uuidv4(),
+      cart_id: req.session.cart_id,
       user_id: req.session.loggedUser[0].user_id,
       payment_method: req.body.payment_method,
       delivery_method: req.body.delivery_method,
@@ -82,7 +93,7 @@ router.route("/makeorder").post((req, res) => {
       orderDetails,
       (err, result) => {
         if (err) throw err;
-        req.session.orderId = null;
+        req.session.cart_id = null;
         res.json({
           msg: "Order Added to Deliver!"
         });

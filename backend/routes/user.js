@@ -9,7 +9,6 @@ router.route("/register").post((req, res) => {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email,
-    address: req.body.address,
     contact_number: req.body.contact_number,
     password: req.body.password
   };
@@ -47,6 +46,15 @@ router.post("/log", (request, response) => {
         if (results.length > 0) {
           request.session.loggedIn = true;
           request.session.loggedUser = results;
+          // request.session.cart_id = uuidv4();
+          // var cartData = {
+          //   cart_id: request.session.cart_id,
+          //   user_id: request.session.loggedUser[0].user_id
+          // };
+          // var sql2 = "INSERT INTO cart SET ?";
+          // mysqlConnection.query(sql2, cartData, (err, result) => {
+          //   if (err) throw err;
+          // });
           response.send({ msg: "Succesfully Logged In!", loggedUser: results });
         } else {
           response.send({ msg: "Incorrect email and/or Password!" });
