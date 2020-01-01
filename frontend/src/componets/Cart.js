@@ -87,9 +87,6 @@ export class Cart extends Component {
   }
 }
 
-const mapToProps = (state) => {
-  return {
-    products: state.products
-  };
-};
-export default (Cart);
+
+
+export default Cart;
