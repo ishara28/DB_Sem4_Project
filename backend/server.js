@@ -23,6 +23,7 @@ const productsRouter = require("./routes/products");
 const categoryRouter = require("./routes/category");
 
 const userRouter = require("./routes/user");
+const adminRouter = require("./routes/admin");
 const orderRouter = require("./routes/order");
 const sessionRouter = require("./routes/sessions");
 

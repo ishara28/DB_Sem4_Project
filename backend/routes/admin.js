@@ -46,12 +46,13 @@ router.route("/report4").get((req, res) => {
 
 //Customer - order report
 
-router.route("/report4").get((req, res) => {
-  console.log("resv")
-  const sql = "SELECT * FROM product";
+router.route("/report5").get((req, res) => {
+  console.log("resv23")
+  const sql = "SELECT title, category_name, quantity, total_price, payment_method, delivery_method, order_date_time,remaining_days FROM orders NATURAL JOIN cart NATURAL JOIN cart_item NATURAL JOIN product_details NATURAL JOIN delivery where user_id='asanka95'"
   mysqlConnection.query(sql, function(err, result) {
     if (err) throw err;
-    res.json("report4");
+    res.json(result);
+    console.log(result)
   });
 });
 
