@@ -7,7 +7,6 @@ import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./componets/Navbar";
 import Home from "./componets/Home";
 import Cart from "./componets/Cart";
-
 export class App extends Component {
   render() {
     return (
@@ -44,7 +43,6 @@ export class App extends Component {
                 </div>
               )}
             />
-          
           </switch>
         </BrowserRouter>
       </div>

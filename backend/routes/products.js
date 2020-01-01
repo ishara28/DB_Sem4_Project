@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const mysqlConnection = require("../connection");
+var session = require("express-session");
 
 //Get All Products
 router.route("/").get((req, res) => {
-  console.log("received")
-  const qry = "SELECT * FROM product";
+  console.log("received");
+  const qry =
+    "SELECT * FROM product INNER JOIN product_varient ON product.product_id=product_varient.product_id WHERE product_varient.default_varient='true'";
   mysqlConnection.query(qry, function(err, result, fields) {
     if (err) throw err;
     res.json(result);
@@ -14,7 +16,8 @@ router.route("/").get((req, res) => {
 //Get All Products according to category
 router.route("/category/:category").get((req, res) => {
   var category = req.params.category;
-  const sql ="SELECT * FROM product natural join category where category_name=?";
+  const sql =
+    "SELECT * FROM product natural join category where category_name=?";
   mysqlConnection.query(sql, category, (err, result, fields) => {
     if (err) throw err;
     res.json(result);
