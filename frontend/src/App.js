@@ -16,7 +16,6 @@ import Report3 from "./componets/reports/Report3";
 import Report4 from "./componets/reports/Report4";
 import Report5 from "./componets/reports/Report5";
 
-
 export class App extends Component {
   render() {
     return (
@@ -60,7 +59,6 @@ export class App extends Component {
             <Route exact path="/admin/report3" component={Report3}></Route>
             <Route exact path="/admin/report4" component={Report4}></Route>
             <Route exact path="/admin/report5" component={Report5}></Route>
-
           </switch>
         </BrowserRouter>
       </div>
