@@ -5,16 +5,16 @@ import { connect } from "react-redux";
 import { stat } from "fs";
 
 export class Cart extends Component {
-  // state = {
-  //   user_id:null,
-  //   total: 0,
-  //   products: [
-  //     { product_id: "12", price: 1200, name: "Apple phone", qty: 1 },
-  //     { product_id: "13", price: 1600, name: "SAMSUNG phone", qty: 2 },
-  //     { product_id: "14", price: 1450, name: "NOKIA phone", qty: 3 },
-  //     { product_id: "15", price: 780, name: "MI phone", qty: 4 }
-  //   ]
-  // };
+  state = {
+    user_id:null,
+    total: 0,
+    products: [
+      { product_id: "12", price: 1200, name: "Apple phone", qty: 1 },
+      { product_id: "13", price: 1600, name: "SAMSUNG phone", qty: 2 },
+      { product_id: "14", price: 1450, name: "NOKIA phone", qty: 3 },
+      { product_id: "15", price: 780, name: "MI phone", qty: 4 }
+    ]
+  };
 
   componentDidMount() {
     //     var id = this.props.match.params.product_id;
@@ -92,4 +92,4 @@ const mapToProps = (state) => {
     products: state.products
   };
 };
-export default connect(mapToProps)(Cart);
+export default (Cart);
