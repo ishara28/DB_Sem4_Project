@@ -50,17 +50,22 @@ router.route("/additems").post((req, res) => {
           cart_id: req.session.cart_id,
           quantity: req.body.quantity
         };
-
-        mysqlConnection.query(
-          "INSERT INTO cart_item SET ?",
-          orderItem,
-          (err, result) => {
-            if (err) throw err;
-            res.json({
-              msg: "Order Item Added!"
-            });
-          }
-        );
+        if (orderItem.quantity < rem_qty) {
+          mysqlConnection.query(
+            "INSERT INTO cart_item SET ?",
+            orderItem,
+            (err, result) => {
+              if (err) throw err;
+              res.json({
+                msg: "Order Item Added!"
+              });
+            }
+          );
+        } else {
+          res.json({
+            msg: "No insufficient quantity"
+          });
+        }
       } else {
         res.json({
           msg: "Remaining quantity is ZERO!!!"
