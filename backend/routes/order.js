@@ -39,9 +39,9 @@ router.route("/pendingorders").get((req, res) => {
 //Add items to an order
 router.route("/additems").post((req, res) => {
   var sku = req.body.sku;
-  var sql = "SELECT remaining_quantity FROM product_varient WHERE sku = ?";
+  var sql = "SELECT check_stock(?) as rem_quantity";
   mysqlConnection.query(sql, sku, (err, results) => {
-    var rem_qty = results[0].remaining_quantity;
+    var rem_qty = results[0].rem_quantity;
 
     if (req.session.loggedUser) {
       if (rem_qty > 0) {

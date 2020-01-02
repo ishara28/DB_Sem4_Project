@@ -19,7 +19,7 @@ router.route("/time").get((req, res) => {
 
 router.route("/test").post((req, res) => {
   var sku = req.body.sku;
-  var sql = "SELECT remaining_quantity FROM product_varient WHERE sku = ?";
+  var sql = "SELECT check_stock(?)";
   mysqlConnection.query(sql, sku, (err, results) => {
     var rem_qty = results[0].remaining_quantity;
 
@@ -51,6 +51,15 @@ router.route("/test").post((req, res) => {
         msg: "Login First!!!"
       });
     }
+  });
+});
+
+router.route("/test2").post((req, res) => {
+  var sku = req.body.sku;
+  var sql = "SELECT check_stock(?) as rem_quantity";
+  mysqlConnection.query(sql, sku, (err, results) => {
+    var rem_qty = results[0].rem_quantity;
+    res.json(rem_qty);
   });
 });
 module.exports = router;
