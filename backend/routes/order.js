@@ -38,28 +38,40 @@ router.route("/pendingorders").get((req, res) => {
 
 //Add items to an order
 router.route("/additems").post((req, res) => {
-  if (req.session.loggedUser) {
-    var orderItem = {
-      sku: req.body.sku,
-      cart_id: req.session.cart_id,
-      quantity: req.body.quantity
-    };
+  var sku = req.body.sku;
+  var sql = "SELECT remaining_quantity FROM product_varient WHERE sku = ?";
+  mysqlConnection.query(sql, sku, (err, results) => {
+    var rem_qty = results[0].remaining_quantity;
 
-    mysqlConnection.query(
-      "INSERT INTO cart_item SET ?",
-      orderItem,
-      (err, result) => {
-        if (err) throw err;
+    if (req.session.loggedUser) {
+      if (rem_qty > 0) {
+        var orderItem = {
+          sku: req.body.sku,
+          cart_id: req.session.cart_id,
+          quantity: req.body.quantity
+        };
+
+        mysqlConnection.query(
+          "INSERT INTO cart_item SET ?",
+          orderItem,
+          (err, result) => {
+            if (err) throw err;
+            res.json({
+              msg: "Order Item Added!"
+            });
+          }
+        );
+      } else {
         res.json({
-          msg: "Order Item Added!"
+          msg: "Remaining quantity is ZERO!!!"
         });
       }
-    );
-  } else {
-    res.json({
-      msg: "Log First"
-    });
-  }
+    } else {
+      res.json({
+        msg: "Login First!!!"
+      });
+    }
+  });
 });
 
 //make order
